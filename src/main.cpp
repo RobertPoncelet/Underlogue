@@ -1,5 +1,7 @@
 #include <panel.h>
-#include <ncurses.h>
+#include <ncursesw/ncurses.h>
+#include <locale.h>
+
 #include <iostream>
 #include <fstream>
 #include <sstream>
@@ -10,6 +12,7 @@ int main()
 	PANEL  *my_panels[3];
 	int lines = 10, cols = 40, y = 2, x = 4, i;
 
+	setlocale(LC_ALL,"");
 	initscr();
 	cbreak();
 	noecho();
@@ -38,14 +41,15 @@ int main()
 	doupdate();
 
 	std::string line;
-    std::ifstream portrait ("art/asriel.txt");
+    std::ifstream portrait ("art/alphys.txt");
     int lineNum = 0;
 
     if (portrait.is_open())
     {
         while ( getline (portrait,line) )
         {
-            mvprintw(10 + lineNum,10,"%s",line.c_str());
+            mvprintw(10 + lineNum,10, "%s", line.c_str());
+            //mvaddstr(10 + lineNum,10,line.c_str());
             ++lineNum;
         }
         portrait.close();
@@ -54,6 +58,7 @@ int main()
     else std::cout << "Unable to open file\n";
 
     refresh();
+    doupdate();
 	
 	getch();
 	endwin();
