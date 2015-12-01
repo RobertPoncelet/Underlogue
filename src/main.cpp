@@ -1,27 +1,14 @@
 #include <panel.h>
 #include <ncurses.h>
-//#include <iostream>
-//#include <fstream>
-//#include <sstream>
+#include <iostream>
+#include <fstream>
+#include <sstream>
 
 int main()
-{	WINDOW *my_wins[3];
+{	
+	WINDOW *my_wins[3];
 	PANEL  *my_panels[3];
 	int lines = 10, cols = 40, y = 2, x = 4, i;
-	
-    /*std::string line;
-    std::ifstream portrait ("art/asriel.txt");
-
-    if (portrait.is_open())
-    {
-        while ( getline (portrait,line) )
-        {
-            
-        }
-        portrait.close();
-    }
-
-    else std::cout << "Unable to open file\n";*/
 
 	initscr();
 	cbreak();
@@ -49,6 +36,24 @@ int main()
 
 	/* Show it on the screen */
 	doupdate();
+
+	std::string line;
+    std::ifstream portrait ("art/asriel.txt");
+    int lineNum = 0;
+
+    if (portrait.is_open())
+    {
+        while ( getline (portrait,line) )
+        {
+            mvprintw(10 + lineNum,10,"%s",line.c_str());
+            ++lineNum;
+        }
+        portrait.close();
+    }
+
+    else std::cout << "Unable to open file\n";
+
+    refresh();
 	
 	getch();
 	endwin();
