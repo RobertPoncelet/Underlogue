@@ -24,10 +24,12 @@
 #	@rm -f ${EXES}
 
 CC=g++
-CFLAGS=
+CFLAGS=-I include/
 LIBS=-lpanelw -lncursesw
 
-all: src/main.o
-	$(CC) -o underlogue src/main.o $(LIBS)
+all: src/ulScriptReader.o src/main.o
+	$(CC) -o underlogue src/main.cpp src/ulScriptReader.cpp $(LIBS) $(CFLAGS)
+	#g++ -o underlogue src/main.cpp src/ulScriptReader.cpp -lpanelw -lncursesw -I include/
+
      
      

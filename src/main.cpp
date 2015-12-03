@@ -6,8 +6,13 @@
 #include <fstream>
 #include <sstream>
 
+#include "ulScriptReader.h"
+
 int main(int argc, char* argv[])
 {	
+	ulScriptReader script = ulScriptReader();
+	script.parseArguments(argc, &argv[0]);
+	
 	WINDOW *my_wins[3];
 	PANEL  *my_panels[3];
 	int lines = 10, cols = 40, y = 2, x = 4, i;
@@ -56,15 +61,17 @@ int main(int argc, char* argv[])
     }
     else std::cout << "Unable to open file\n";
     
-    for (int i = 0; i < argc; ++i)
+    /*for (int i = 0; i < argc; ++i)
     {
 		mvprintw(10 + i, 30, "%s", argv[i]);
-	}
+	}*/
 
     refresh();
     doupdate();
 	
 	getch();
 	endwin();
+	
+	script.printScript();
 }
 
