@@ -25,7 +25,7 @@
 
 CC=g++
 CFLAGS=
-LIBS=-lpanel -lncursesw
+LIBS=-lpanelw -lncursesw
 
 all: src/main.o
 	$(CC) -o underlogue src/main.o $(LIBS)

@@ -6,7 +6,7 @@
 #include <fstream>
 #include <sstream>
 
-int main()
+int main(int argc, char* argv[])
 {	
 	WINDOW *my_wins[3];
 	PANEL  *my_panels[3];
@@ -54,8 +54,12 @@ int main()
         }
         portrait.close();
     }
-
     else std::cout << "Unable to open file\n";
+    
+    for (int i = 0; i < argc; ++i)
+    {
+		mvprintw(10 + i, 30, "%s", argv[i]);
+	}
 
     refresh();
     doupdate();
