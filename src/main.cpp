@@ -10,8 +10,14 @@
 
 int main(int argc, char* argv[])
 {	
+	if (argc == 1)
+	{
+		std::cout<<"Please input a string or file path to print\n";
+		return 0;
+	}
+	
 	ulScriptReader script = ulScriptReader();
-	script.parseArguments(argc, &argv[0]);
+	script.parseArguments(argc, argv);
 	
 	WINDOW *my_wins[3];
 	PANEL  *my_panels[3];
@@ -72,6 +78,6 @@ int main(int argc, char* argv[])
 	getch();
 	endwin();
 	
-	script.printScript();
+	script.debugPrintScript();
 }
 

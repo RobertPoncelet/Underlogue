@@ -11,10 +11,13 @@ public:
 	~ulScriptReader();
 	
 	void parseArguments(int argc, char* argv[]);
-	void printScript();
+	void debugPrintScript();
+	std::string getNextLine();
+	void reset();
 	
 private:
 	std::vector<std::string> m_script;
+	std::vector<std::string>::iterator m_currentLine;
 };
 
 #endif
