@@ -383,18 +383,18 @@ union yyalloc
 #endif /* !YYCOPY_NEEDED */
 
 /* YYFINAL -- State number of the termination state.  */
-#define YYFINAL  14
+#define YYFINAL  10
 /* YYLAST -- Last index in YYTABLE.  */
-#define YYLAST   12
+#define YYLAST   27
 
 /* YYNTOKENS -- Number of terminals.  */
 #define YYNTOKENS  9
 /* YYNNTS -- Number of nonterminals.  */
-#define YYNNTS  2
+#define YYNNTS  9
 /* YYNRULES -- Number of rules.  */
-#define YYNRULES  13
+#define YYNRULES  14
 /* YYNSTATES -- Number of states.  */
-#define YYNSTATES  15
+#define YYNSTATES  29
 
 /* YYTRANSLATE[YYX] -- Symbol number corresponding to YYX as returned
    by yylex, with out-of-bounds checking.  */
@@ -441,8 +441,8 @@ static const yytype_uint8 yytranslate[] =
   /* YYRLINE[YYN] -- Source line where rule number YYN was defined.  */
 static const yytype_uint8 yyrline[] =
 {
-       0,    38,    38,    39,    40,    41,    42,    43,    44,    45,
-      46,    47,    48,    49
+       0,    53,    53,    54,    55,    59,    60,    64,    68,    69,
+      73,    77,    80,    81,    84
 };
 #endif
 
@@ -452,7 +452,9 @@ static const yytype_uint8 yyrline[] =
 static const char *const yytname[] =
 {
   "$end", "error", "$undefined", "OPEN_BRACKET", "CLOSE_BRACKET", "SLASH",
-  "COLON", "STRING", "STRING_LITERAL", "$accept", "derp", YY_NULLPTR
+  "COLON", "STRING", "STRING_LITERAL", "$accept", "item_list", "item",
+  "branching_section", "regular_line", "option_line", "option_list",
+  "character_identifier", "options", YY_NULLPTR
 };
 #endif
 
@@ -465,10 +467,10 @@ static const yytype_uint16 yytoknum[] =
 };
 # endif
 
-#define YYPACT_NINF -4
+#define YYPACT_NINF -5
 
 #define yypact_value_is_default(Yystate) \
-  (!!((Yystate) == (-4)))
+  (!!((Yystate) == (-5)))
 
 #define YYTABLE_NINF -1
 
@@ -479,8 +481,9 @@ static const yytype_uint16 yytoknum[] =
      STATE-NUM.  */
 static const yytype_int8 yypact[] =
 {
-      -3,    -3,    -3,    -3,    -3,    -3,    -3,    12,    -4,    -4,
-      -4,    -4,    -4,    -4,    -4
+      -4,     4,    -5,     1,    -5,    -5,     7,     5,     8,     6,
+      -5,    -5,     9,    -5,    11,     5,     3,    14,    10,    16,
+      -5,    -5,    -5,    13,    -4,    17,    -2,    -5,    -5
 };
 
   /* YYDEFACT[STATE-NUM] -- Default reduction number in state STATE-NUM.
@@ -488,20 +491,21 @@ static const yytype_int8 yypact[] =
      means the default is an error.  */
 static const yytype_uint8 yydefact[] =
 {
-       0,     8,     9,    10,    11,    12,    13,     0,     2,     3,
-       4,     5,     6,     7,     1
+       4,    13,     9,     0,     3,     6,     5,     0,     0,     0,
+       1,     2,     0,    10,     0,     0,     0,     0,     0,     0,
+       7,     8,    12,     0,     4,     0,     0,    14,    11
 };
 
   /* YYPGOTO[NTERM-NUM].  */
 static const yytype_int8 yypgoto[] =
 {
-      -4,     5
+      -5,     0,    -3,    -5,    -5,    -5,    12,    -5,    -5
 };
 
   /* YYDEFGOTO[NTERM-NUM].  */
 static const yytype_int8 yydefgoto[] =
 {
-      -1,     7
+      -1,     3,     4,     5,     6,     7,    15,     8,    13
 };
 
   /* YYTABLE[YYPACT[STATE-NUM]] -- What to do in state STATE-NUM.  If
@@ -509,36 +513,39 @@ static const yytype_int8 yydefgoto[] =
      number is the opposite.  If YYTABLE_NINF, syntax error.  */
 static const yytype_uint8 yytable[] =
 {
-       1,     2,     3,     4,     5,     6,     8,     9,    10,    11,
-      12,    13,    14
+      11,    10,    28,     1,     2,     1,     2,     9,     1,     2,
+      12,    21,    14,    17,    16,    23,    18,    19,    22,    24,
+      25,    27,     0,    11,    26,     0,     0,    20
 };
 
-static const yytype_uint8 yycheck[] =
+static const yytype_int8 yycheck[] =
 {
-       3,     4,     5,     6,     7,     8,     1,     2,     3,     4,
-       5,     6,     0
+       3,     0,     4,     7,     8,     7,     8,     3,     7,     8,
+       3,     8,     7,     7,     6,     5,     7,     6,     4,     3,
+       7,     4,    -1,    26,    24,    -1,    -1,    15
 };
 
   /* YYSTOS[STATE-NUM] -- The (internal number of the) accessing
      symbol of state STATE-NUM.  */
 static const yytype_uint8 yystos[] =
 {
-       0,     3,     4,     5,     6,     7,     8,    10,    10,    10,
-      10,    10,    10,    10,     0
+       0,     7,     8,    10,    11,    12,    13,    14,    16,     3,
+       0,    11,     3,    17,     7,    15,     6,     7,     7,     6,
+      15,     8,     4,     5,     3,     7,    10,     4,     4
 };
 
   /* YYR1[YYN] -- Symbol number of symbol that rule YYN derives.  */
 static const yytype_uint8 yyr1[] =
 {
-       0,     9,    10,    10,    10,    10,    10,    10,    10,    10,
-      10,    10,    10,    10
+       0,     9,    10,    10,    10,    11,    11,    12,    13,    13,
+      14,    15,    16,    16,    17
 };
 
   /* YYR2[YYN] -- Number of symbols on the right hand side of rule YYN.  */
 static const yytype_uint8 yyr2[] =
 {
-       0,     2,     2,     2,     2,     2,     2,     2,     1,     1,
-       1,     1,     1,     1
+       0,     2,     2,     1,     0,     1,     1,     3,     3,     1,
+       2,     5,     4,     1,     5
 };
 
 
@@ -1214,80 +1221,44 @@ yyreduce:
   YY_REDUCE_PRINT (yyn);
   switch (yyn)
     {
-        case 2:
-#line 38 "underlogue.y" /* yacc.c:1646  */
-    { std::cout << "bison found an open bracket: " << (yyvsp[-1].sval) << std::endl; }
-#line 1221 "underlogue.tab.c" /* yacc.c:1646  */
-    break;
-
-  case 3:
-#line 39 "underlogue.y" /* yacc.c:1646  */
-    { std::cout << "bison found a close bracket: " << (yyvsp[-1].sval) << std::endl; }
-#line 1227 "underlogue.tab.c" /* yacc.c:1646  */
-    break;
-
-  case 4:
-#line 40 "underlogue.y" /* yacc.c:1646  */
-    { std::cout << "bison found a slash: " << (yyvsp[-1].sval) << std::endl; }
-#line 1233 "underlogue.tab.c" /* yacc.c:1646  */
-    break;
-
-  case 5:
-#line 41 "underlogue.y" /* yacc.c:1646  */
-    { std::cout << "bison found a colon: " << (yyvsp[-1].sval) << std::endl; }
-#line 1239 "underlogue.tab.c" /* yacc.c:1646  */
-    break;
-
-  case 6:
-#line 42 "underlogue.y" /* yacc.c:1646  */
-    { std::cout << "bison found a string: " << (yyvsp[-1].sval) << std::endl; }
-#line 1245 "underlogue.tab.c" /* yacc.c:1646  */
-    break;
-
-  case 7:
-#line 43 "underlogue.y" /* yacc.c:1646  */
-    { std::cout << "bison found a string literal: " << (yyvsp[-1].sval) << std::endl; }
-#line 1251 "underlogue.tab.c" /* yacc.c:1646  */
-    break;
-
-  case 8:
-#line 44 "underlogue.y" /* yacc.c:1646  */
-    { std::cout << "bison found an open bracket: " << (yyvsp[0].sval) << std::endl; }
-#line 1257 "underlogue.tab.c" /* yacc.c:1646  */
+        case 8:
+#line 68 "underlogue.y" /* yacc.c:1646  */
+    { std::cout << "This character says: " << (yyvsp[0].sval) << std::endl; }
+#line 1228 "underlogue.tab.c" /* yacc.c:1646  */
     break;
 
   case 9:
-#line 45 "underlogue.y" /* yacc.c:1646  */
-    { std::cout << "bison found a close bracket: " << (yyvsp[0].sval) << std::endl; }
-#line 1263 "underlogue.tab.c" /* yacc.c:1646  */
-    break;
-
-  case 10:
-#line 46 "underlogue.y" /* yacc.c:1646  */
-    { std::cout << "bison found a slash: " << (yyvsp[0].sval) << std::endl; }
-#line 1269 "underlogue.tab.c" /* yacc.c:1646  */
+#line 69 "underlogue.y" /* yacc.c:1646  */
+    { std::cout << "Message from no character: " << (yyvsp[0].sval) << std::endl; }
+#line 1234 "underlogue.tab.c" /* yacc.c:1646  */
     break;
 
   case 11:
-#line 47 "underlogue.y" /* yacc.c:1646  */
-    { std::cout << "bison found a colon: " << (yyvsp[0].sval) << std::endl; }
-#line 1275 "underlogue.tab.c" /* yacc.c:1646  */
+#line 77 "underlogue.y" /* yacc.c:1646  */
+    { std::cout << "End of option branch: " << (yyvsp[-4].sval) << std::endl; }
+#line 1240 "underlogue.tab.c" /* yacc.c:1646  */
     break;
 
   case 12:
-#line 48 "underlogue.y" /* yacc.c:1646  */
-    { std::cout << "bison found a string: " << (yyvsp[0].sval) << std::endl; }
-#line 1281 "underlogue.tab.c" /* yacc.c:1646  */
+#line 80 "underlogue.y" /* yacc.c:1646  */
+    { std::cout << "Character is " << (yyvsp[-3].sval) << " expressing " << (yyvsp[-1].sval) << std::endl; }
+#line 1246 "underlogue.tab.c" /* yacc.c:1646  */
     break;
 
   case 13:
-#line 49 "underlogue.y" /* yacc.c:1646  */
-    { std::cout << "bison found a string literal: " << (yyvsp[0].sval) << std::endl; }
-#line 1287 "underlogue.tab.c" /* yacc.c:1646  */
+#line 81 "underlogue.y" /* yacc.c:1646  */
+    { std::cout << "Character is " << (yyvsp[0].sval) << std::endl; }
+#line 1252 "underlogue.tab.c" /* yacc.c:1646  */
+    break;
+
+  case 14:
+#line 84 "underlogue.y" /* yacc.c:1646  */
+    { std::cout << "Option 1: " << (yyvsp[-3].sval) << " Option 2: " << (yyvsp[-1].sval) << std::endl; }
+#line 1258 "underlogue.tab.c" /* yacc.c:1646  */
     break;
 
 
-#line 1291 "underlogue.tab.c" /* yacc.c:1646  */
+#line 1262 "underlogue.tab.c" /* yacc.c:1646  */
       default: break;
     }
   /* User semantic actions sometimes alter yychar, and that requires
@@ -1515,7 +1486,7 @@ yyreturn:
 #endif
   return yyresult;
 }
-#line 51 "underlogue.y" /* yacc.c:1906  */
+#line 86 "underlogue.y" /* yacc.c:1906  */
 
 
 int main(int, char**) {

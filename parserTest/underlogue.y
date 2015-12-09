@@ -34,20 +34,55 @@ void yyerror(const char *s);
 // this is the actual grammar that bison will parse, but for right now it's just
 // something silly to echo to the screen what bison gets from flex.  We'll
 // make a real one shortly:
-derp:
-	OPEN_BRACKET derp      	 { std::cout << "bison found an open bracket: " << $1 << std::endl; }
-	| CLOSE_BRACKET derp	 { std::cout << "bison found a close bracket: " << $1 << std::endl; }
-	| SLASH derp	 	 { std::cout << "bison found a slash: " << $1 << std::endl; }
-	| COLON derp           	 { std::cout << "bison found a colon: " << $1 << std::endl; }
-	| STRING derp         	 { std::cout << "bison found a string: " << $1 << std::endl; }
-	| STRING_LITERAL derp    { std::cout << "bison found a string literal: " << $1 << std::endl; }
-	| OPEN_BRACKET      	 { std::cout << "bison found an open bracket: " << $1 << std::endl; }
-	| CLOSE_BRACKET 	 { std::cout << "bison found a close bracket: " << $1 << std::endl; }
-	| SLASH 	 	 { std::cout << "bison found a slash: " << $1 << std::endl; }
-	| COLON            	 { std::cout << "bison found a colon: " << $1 << std::endl; }
-	| STRING          	 { std::cout << "bison found a string: " << $1 << std::endl; }
-	| STRING_LITERAL         { std::cout << "bison found a string literal: " << $1 << std::endl; }
+//derp:
+//	OPEN_BRACKET derp      	 { std::cout << "bison found an open bracket: " << $1 << std::endl; }
+//	| CLOSE_BRACKET derp	 { std::cout << "bison found a close bracket: " << $1 << std::endl; }
+//	| SLASH derp	 	 { std::cout << "bison found a slash: " << $1 << std::endl; }
+//	| COLON derp           	 { std::cout << "bison found a colon: " << $1 << std::endl; }
+//	| STRING derp         	 { std::cout << "bison found a string: " << $1 << std::endl; }
+//	| STRING_LITERAL derp    { std::cout << "bison found a string literal: " << $1 << std::endl; }
+//	| OPEN_BRACKET      	 { std::cout << "bison found an open bracket: " << $1 << std::endl; }
+//	| CLOSE_BRACKET 	 { std::cout << "bison found a close bracket: " << $1 << std::endl; }
+//	| SLASH 	 	 { std::cout << "bison found a slash: " << $1 << std::endl; }
+//	| COLON            	 { std::cout << "bison found a colon: " << $1 << std::endl; }
+//	| STRING          	 { std::cout << "bison found a string: " << $1 << std::endl; }
+//	| STRING_LITERAL         { std::cout << "bison found a string literal: " << $1 << std::endl; }
+//	;
+	
+item_list:
+	item_list item
+	| item
+	| 
 	;
+	
+item:
+	regular_line
+	| branching_section
+	;
+	
+branching_section:
+	option_line option_list option_list
+	;
+	
+regular_line:
+	character_identifier COLON STRING_LITERAL				{ std::cout << "This character says: " << $3 << std::endl; }
+	| STRING_LITERAL										{ std::cout << "Message from no character: " << $1 << std::endl; }
+	;
+	
+option_line:
+	regular_line options
+	;
+	
+option_list:
+	STRING COLON OPEN_BRACKET item_list CLOSE_BRACKET		{ std::cout << "End of option branch: " << $1 << std::endl; }
+	
+character_identifier:
+	STRING OPEN_BRACKET STRING CLOSE_BRACKET				{ std::cout << "Character is " << $1 << " expressing " << $3 << std::endl; }
+	| STRING												{ std::cout << "Character is " << $1 << std::endl; }
+	
+options:
+	OPEN_BRACKET STRING SLASH STRING CLOSE_BRACKET			{ std::cout << "Option 1: " << $2 << " Option 2: " << $4 << std::endl; }
+
 %%
 
 int main(int, char**) {
