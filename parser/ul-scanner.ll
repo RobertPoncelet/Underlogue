@@ -18,8 +18,8 @@
 static yy::location loc;
 %}
 %option noyywrap nounput batch debug noinput
-id    [a-zA-Z][a-zA-Z_0-9]*
-int   [0-9]+
+string    [a-zA-Z_0-9]+
+stringliteral \"(\\.|[^"])*\"
 blank [ \t]
 
 %{
@@ -35,27 +35,19 @@ blank [ \t]
 %}
 
 {blank}+   loc.step ();
-[\n]+      loc.lines (yyleng); loc.step ();
-"-"      return yy::ul_parser::make_MINUS(loc);
-"+"      return yy::ul_parser::make_PLUS(loc);
-"*"      return yy::ul_parser::make_STAR(loc);
+[\n]+      loc.lines (yyleng); /*return yy::ul_parser::make_NEWLINE(loc);*/loc.step ();
 "/"      return yy::ul_parser::make_SLASH(loc);
 "("      return yy::ul_parser::make_LPAREN(loc);
 ")"      return yy::ul_parser::make_RPAREN(loc);
-":="     return yy::ul_parser::make_ASSIGN(loc);
+":"      return yy::ul_parser::make_COLON(loc);
 
 
-{int}      {
-  errno = 0;
-  long n = strtol (yytext, NULL, 10);
-  if (! (INT_MIN <= n && n <= INT_MAX && errno != ERANGE))
-    driver.error (loc, "integer is out of range");
-  return yy::ul_parser::make_NUMBER(n, loc);
-}
 
-{id}       return yy::ul_parser::make_IDENTIFIER(yytext, loc);
+{string}         return yy::ul_parser::make_STRING(yytext, loc);
+{stringliteral}  return yy::ul_parser::make_STRING_LITERAL(yytext, loc);
 .          driver.error (loc, "invalid character");
 <<EOF>>    return yy::ul_parser::make_END(loc);
+
 %%
 
 void

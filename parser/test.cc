@@ -1,6 +1,5 @@
 //This code is adapted from Bison 3.0.2's Calc++ example
 
-#line 11477 "./doc/bison.texi"
 #include <iostream>
 #include "ul-driver.hh"
 
