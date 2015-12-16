@@ -59,7 +59,7 @@ extern int yydebug;
 typedef union YYSTYPE YYSTYPE;
 union YYSTYPE
 {
-#line 20 "underlogue.y" /* yacc.c:1909  */
+#line 21 "underlogue.y" /* yacc.c:1909  */
 
 	char *sval;
 

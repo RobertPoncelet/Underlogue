@@ -72,10 +72,11 @@
 extern "C" int yylex();
 extern "C" int yyparse();
 extern "C" FILE *yyin;
+//extern int lineNum;
  
 void yyerror(const char *s);
 
-#line 79 "underlogue.tab.c" /* yacc.c:339  */
+#line 80 "underlogue.tab.c" /* yacc.c:339  */
 
 # ifndef YY_NULLPTR
 #  if defined __cplusplus && 201103L <= __cplusplus
@@ -124,11 +125,11 @@ extern int yydebug;
 typedef union YYSTYPE YYSTYPE;
 union YYSTYPE
 {
-#line 20 "underlogue.y" /* yacc.c:355  */
+#line 21 "underlogue.y" /* yacc.c:355  */
 
 	char *sval;
 
-#line 132 "underlogue.tab.c" /* yacc.c:355  */
+#line 133 "underlogue.tab.c" /* yacc.c:355  */
 };
 # define YYSTYPE_IS_TRIVIAL 1
 # define YYSTYPE_IS_DECLARED 1
@@ -143,7 +144,7 @@ int yyparse (void);
 
 /* Copy the second part of user declarations.  */
 
-#line 147 "underlogue.tab.c" /* yacc.c:358  */
+#line 148 "underlogue.tab.c" /* yacc.c:358  */
 
 #ifdef short
 # undef short
@@ -441,8 +442,8 @@ static const yytype_uint8 yytranslate[] =
   /* YYRLINE[YYN] -- Source line where rule number YYN was defined.  */
 static const yytype_uint8 yyrline[] =
 {
-       0,    53,    53,    54,    55,    59,    60,    64,    68,    69,
-      73,    77,    80,    81,    84
+       0,    54,    54,    55,    56,    60,    61,    65,    69,    70,
+      74,    78,    81,    82,    85
 };
 #endif
 
@@ -1222,43 +1223,43 @@ yyreduce:
   switch (yyn)
     {
         case 8:
-#line 68 "underlogue.y" /* yacc.c:1646  */
+#line 69 "underlogue.y" /* yacc.c:1646  */
     { std::cout << "This character says: " << (yyvsp[0].sval) << std::endl; }
-#line 1228 "underlogue.tab.c" /* yacc.c:1646  */
+#line 1229 "underlogue.tab.c" /* yacc.c:1646  */
     break;
 
   case 9:
-#line 69 "underlogue.y" /* yacc.c:1646  */
+#line 70 "underlogue.y" /* yacc.c:1646  */
     { std::cout << "Message from no character: " << (yyvsp[0].sval) << std::endl; }
-#line 1234 "underlogue.tab.c" /* yacc.c:1646  */
+#line 1235 "underlogue.tab.c" /* yacc.c:1646  */
     break;
 
   case 11:
-#line 77 "underlogue.y" /* yacc.c:1646  */
+#line 78 "underlogue.y" /* yacc.c:1646  */
     { std::cout << "End of option branch: " << (yyvsp[-4].sval) << std::endl; }
-#line 1240 "underlogue.tab.c" /* yacc.c:1646  */
+#line 1241 "underlogue.tab.c" /* yacc.c:1646  */
     break;
 
   case 12:
-#line 80 "underlogue.y" /* yacc.c:1646  */
+#line 81 "underlogue.y" /* yacc.c:1646  */
     { std::cout << "Character is " << (yyvsp[-3].sval) << " expressing " << (yyvsp[-1].sval) << std::endl; }
-#line 1246 "underlogue.tab.c" /* yacc.c:1646  */
+#line 1247 "underlogue.tab.c" /* yacc.c:1646  */
     break;
 
   case 13:
-#line 81 "underlogue.y" /* yacc.c:1646  */
+#line 82 "underlogue.y" /* yacc.c:1646  */
     { std::cout << "Character is " << (yyvsp[0].sval) << std::endl; }
-#line 1252 "underlogue.tab.c" /* yacc.c:1646  */
+#line 1253 "underlogue.tab.c" /* yacc.c:1646  */
     break;
 
   case 14:
-#line 84 "underlogue.y" /* yacc.c:1646  */
+#line 85 "underlogue.y" /* yacc.c:1646  */
     { std::cout << "Option 1: " << (yyvsp[-3].sval) << " Option 2: " << (yyvsp[-1].sval) << std::endl; }
-#line 1258 "underlogue.tab.c" /* yacc.c:1646  */
+#line 1259 "underlogue.tab.c" /* yacc.c:1646  */
     break;
 
 
-#line 1262 "underlogue.tab.c" /* yacc.c:1646  */
+#line 1263 "underlogue.tab.c" /* yacc.c:1646  */
       default: break;
     }
   /* User semantic actions sometimes alter yychar, and that requires
@@ -1486,7 +1487,7 @@ yyreturn:
 #endif
   return yyresult;
 }
-#line 86 "underlogue.y" /* yacc.c:1906  */
+#line 87 "underlogue.y" /* yacc.c:1906  */
 
 
 int main(int, char**) {
@@ -1508,7 +1509,7 @@ int main(int, char**) {
 }
 
 void yyerror(const char *s) {
-	std::cout << "EEK, parse error!  Message: " << s << std::endl;
+	std::cout << "Parse error!  Message: " << s << std::endl;
 	// might as well halt now:
 	exit(-1);
 }

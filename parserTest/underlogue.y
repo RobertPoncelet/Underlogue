@@ -7,6 +7,7 @@
 extern "C" int yylex();
 extern "C" int yyparse();
 extern "C" FILE *yyin;
+//extern int lineNum;
  
 void yyerror(const char *s);
 %}
@@ -30,25 +31,7 @@ void yyerror(const char *s);
 %token <sval> STRING
 %token <sval> STRING_LITERAL
 
-%%
-// this is the actual grammar that bison will parse, but for right now it's just
-// something silly to echo to the screen what bison gets from flex.  We'll
-// make a real one shortly:
-//derp:
-//	OPEN_BRACKET derp      	 { std::cout << "bison found an open bracket: " << $1 << std::endl; }
-//	| CLOSE_BRACKET derp	 { std::cout << "bison found a close bracket: " << $1 << std::endl; }
-//	| SLASH derp	 	 { std::cout << "bison found a slash: " << $1 << std::endl; }
-//	| COLON derp           	 { std::cout << "bison found a colon: " << $1 << std::endl; }
-//	| STRING derp         	 { std::cout << "bison found a string: " << $1 << std::endl; }
-//	| STRING_LITERAL derp    { std::cout << "bison found a string literal: " << $1 << std::endl; }
-//	| OPEN_BRACKET      	 { std::cout << "bison found an open bracket: " << $1 << std::endl; }
-//	| CLOSE_BRACKET 	 { std::cout << "bison found a close bracket: " << $1 << std::endl; }
-//	| SLASH 	 	 { std::cout << "bison found a slash: " << $1 << std::endl; }
-//	| COLON            	 { std::cout << "bison found a colon: " << $1 << std::endl; }
-//	| STRING          	 { std::cout << "bison found a string: " << $1 << std::endl; }
-//	| STRING_LITERAL         { std::cout << "bison found a string literal: " << $1 << std::endl; }
-//	;
-	
+%%	
 item_list:
 	item_list item
 	| item
@@ -104,7 +87,7 @@ int main(int, char**) {
 }
 
 void yyerror(const char *s) {
-	std::cout << "EEK, parse error!  Message: " << s << std::endl;
+	std::cout << "Parse error!  Message: " << s << std::endl;
 	// might as well halt now:
 	exit(-1);
 }
