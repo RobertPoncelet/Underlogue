@@ -10,8 +10,8 @@ struct dialogueLine
     bool hasOptions;
     std::string option1;
     std::string option2;
-    dialogueLine* nextLine1;
-    dialogueLine* nextLine2;
+    std::vector<dialogueLine> branch1;
+    std::vector<dialogueLine> branch2;
 };
 
 #endif

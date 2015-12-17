@@ -1,0 +1,19 @@
+Alphys (happy): "ayy lmao"
+Undyne (confused): "ayy?" (Yes/No)
+Yes:
+(
+    Undyne: "oh ok"
+)
+No:
+(
+    Alphys: "did u just" (yesidid/uhsorry)
+    yesidid:
+    (
+	Undyne: "deal w/ it"
+    )
+    uhsorry:
+    (
+	
+    )
+)
+Alphys: "lmao"

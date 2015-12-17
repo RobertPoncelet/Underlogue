@@ -68,9 +68,9 @@ exp:
 script: item_list                                           { std::cout << "Entire script" << std::endl; }
 
 item_list:
-	item_list item                                          { std::cout << "Item list" << std::endl; 
+	item_list item                                          { /*std::cout << "Item list" << std::endl;*/ 
                                                               driver.script.push_back(driver.currentLine); }
-	| item                                                  { std::cout << "Single item" << std::endl; 
+	| item                                                  { /*std::cout << "Single item" << std::endl;*/ 
                                                               driver.script.push_back(driver.currentLine); }
 	| %empty                                                { std::cout << "Empty item list" << std::endl; }
 	;
@@ -78,13 +78,14 @@ item_list:
 item:
 	regular_line                                            { std::cout << "Regular line" << std::endl; 
                                                               driver.currentLine.hasOptions = false; 
-                                                              driver.currentLine.option1 = ""; 
-                                                              driver.currentLine.option2 = ""; }
-	| branching_section                                     { std::cout << "Branching section" << std::endl; }
+                                                              /*driver.currentLine.option1 = ""; 
+                                                              driver.currentLine.option2 = "";*/ }
+	| branching_section                                     { std::cout << "End of branching section" << std::endl; 
+                                                              driver.currentLine.hasOptions = true; }
 	;
 	
 branching_section:
-	option_line option_list option_list                     { std::cout << "Branching section body" << std::endl; }
+	option_line option_list option_list                     { /*std::cout << "Branching section body" << std::endl;*/ }
 	;
 	
 regular_line:
@@ -94,7 +95,7 @@ regular_line:
 	;
 	
 option_line:
-	regular_line options                                    { std::cout << "Option line body" << std::endl; }
+	regular_line options                                    { /*std::cout << "Option line body" << std::endl;*/ }
 	;
 	
 option_list:
@@ -109,7 +110,8 @@ character_identifier:
     ;
 	
 options:
-	LPAREN STRING SLASH STRING RPAREN	            		{ std::cout << "Option 1: " << $2 << " Option 2: " << $4 << std::endl; }
+	LPAREN STRING SLASH STRING RPAREN	            		{ std::cout << "Option 1: " << $2 << " Option 2: " << $4 << std::endl; 
+                                                              driver.currentLine.option1 = $2; driver.currentLine.option2 = $4; }
     ;
 
 %%
