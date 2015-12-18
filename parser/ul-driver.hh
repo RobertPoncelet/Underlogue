@@ -3,8 +3,9 @@
 #ifndef UL_DRIVER_HH
 #define UL_DRIVER_HH
 #include <string>
-#include <map>
+//#include <map>
 #include <vector>
+#include <stack>
 #include "ul-parser.hh"
 #include "dialogue.h"
 // Tell Flex the lexer's prototype ...
@@ -19,10 +20,12 @@ public:
   ul_driver ();
   virtual ~ul_driver ();
 
-  std::map<std::string, int> variables;
+  //std::map<std::string, int> variables;
   
   std::vector<dialogueLine> script;
-  dialogueLine currentLine;
+  void pushLine();
+  void popLineToScript();
+  dialogueLine& getCurrentLine();
 
   int result;
   // Handling the scanner.
@@ -41,6 +44,15 @@ public:
   void error (const yy::location& l, const std::string& m);
   void error (const std::string& m);
   
-  void printScript();
+  void pushBranch();
+  void switchToBranch2();
+  void popBranch();
+  
+  void printScript(std::vector<dialogueLine>* script);
+  void printLine(dialogueLine line);
+  
+private:
+  std::stack<dialogueLine> lineStack;
+  std::vector<dialogueLine>* currentBranch;
 };
 #endif // ! UL_DRIVER_HH

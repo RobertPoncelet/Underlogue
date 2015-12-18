@@ -2,6 +2,8 @@
 #define DIALOGUE_HH
 #include <string>
 
+//typedef std::vector<dialogueLine> dialogueBranch;
+
 struct dialogueLine
 {
     std::string character;

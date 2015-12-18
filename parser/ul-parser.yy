@@ -65,53 +65,71 @@ exp:
 | "number"      { std::swap ($$, $1); };*/
 
 %start script;
-script: item_list                                           { std::cout << "Entire script" << std::endl; }
+script: item_list                                           { std::cout << "End of script" << std::endl; }
 
 item_list:
 	item_list item                                          { /*std::cout << "Item list" << std::endl;*/ 
-                                                              driver.script.push_back(driver.currentLine); }
+                                                              //driver.addCurrentLineToScript();
+                                                              /*driver.printLine(driver.currentLine);*/ }
 	| item                                                  { /*std::cout << "Single item" << std::endl;*/ 
-                                                              driver.script.push_back(driver.currentLine); }
+                                                              //driver.addCurrentLineToScript();
+                                                              /*driver.printLine(driver.currentLine);*/ }
 	| %empty                                                { std::cout << "Empty item list" << std::endl; }
 	;
 	
 item:
 	regular_line                                            { std::cout << "Regular line" << std::endl; 
-                                                              driver.currentLine.hasOptions = false; 
-                                                              /*driver.currentLine.option1 = ""; 
-                                                              driver.currentLine.option2 = "";*/ }
+                                                              driver.getCurrentLine().hasOptions = false; 
+                                                              driver.getCurrentLine().option1 = ""; 
+                                                              driver.getCurrentLine().option2 = ""; 
+                                                              driver.popLineToScript(); }
 	| branching_section                                     { std::cout << "End of branching section" << std::endl; 
-                                                              driver.currentLine.hasOptions = true; }
+                                                              driver.getCurrentLine().hasOptions = true;
+                                                              driver.popLineToScript(); }
 	;
 	
 branching_section:
-	option_line option_list option_list                     { /*std::cout << "Branching section body" << std::endl;*/ }
+	option_line option_list_1 option_list_2                 { /*std::cout << "Branching section body" << std::endl;*/ }
 	;
 	
 regular_line:
 	character_identifier COLON STRING_LITERAL				{ std::cout << "This character says: " << $3 << std::endl;
-                                                              driver.currentLine.dialogue = $3; }
-	| STRING_LITERAL										{ std::cout << "Message from no character: " << $1 << std::endl; }
+                                                              driver.getCurrentLine().dialogue = $3; }
+	| STRING_LITERAL										{ std::cout << "Message from no character: " << $1 << std::endl;
+                                                              driver.pushLine();
+                                                              driver.getCurrentLine().dialogue = $1;
+                                                              driver.getCurrentLine().character = "";
+                                                              driver.getCurrentLine().expression = ""; }
 	;
 	
 option_line:
 	regular_line options                                    { /*std::cout << "Option line body" << std::endl;*/ }
 	;
 	
-option_list:
-	STRING COLON LPAREN item_list RPAREN		            { std::cout << "End of option branch: " << $1 << std::endl; }
+option_list_1:
+	STRING COLON LPAREN item_list RPAREN		            { std::cout << "End of option branch 1" << std::endl; 
+                                                              driver.switchToBranch2(); }
+    ;
+    
+option_list_2:
+	STRING COLON LPAREN item_list RPAREN		            { std::cout << "End of option branch 2" << std::endl; 
+                                                              driver.popBranch(); }
     ;
 	
 character_identifier:
-	STRING LPAREN STRING RPAREN		                		{ std::cout << "Character is " << $1 << " expressing " << $3 << std::endl; 
-                                                              driver.currentLine.character = $1; driver.currentLine.expression = $3; }
+	STRING LPAREN STRING RPAREN		                		{ std::cout << "Character is " << $1 << " expressing " << $3 << std::endl;
+                                                              driver.pushLine();
+                                                              driver.getCurrentLine().character = $1; driver.getCurrentLine().expression = $3; }
 	| STRING												{ std::cout << "Character is " << $1 << std::endl; 
-                                                              driver.currentLine.character = $1; driver.currentLine.expression = ""; }
+                                                              driver.pushLine();
+                                                              driver.getCurrentLine().character = $1; driver.getCurrentLine().expression = ""; }
     ;
 	
 options:
 	LPAREN STRING SLASH STRING RPAREN	            		{ std::cout << "Option 1: " << $2 << " Option 2: " << $4 << std::endl; 
-                                                              driver.currentLine.option1 = $2; driver.currentLine.option2 = $4; }
+                                                              driver.getCurrentLine().option1 = $2; driver.getCurrentLine().option2 = $4; 
+                                                              driver.getCurrentLine().hasOptions = true;
+                                                              driver.pushBranch(); }
     ;
 
 %%
