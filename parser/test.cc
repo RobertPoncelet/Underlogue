@@ -30,7 +30,7 @@ int main (int argc, char *argv[])
   }
   
   driver.printScript(&driver.script);
-  
+
   return res;
 }
 

@@ -13,7 +13,7 @@ No:
     )
     uhsorry:
     (
-	
+	"* Silence."
     )
 )
 Alphys: "lmao"

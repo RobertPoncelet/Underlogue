@@ -9,7 +9,6 @@ ul_driver::ul_driver()
 {
 //  variables["one"] = 1;
 //  variables["two"] = 2;
-    currentBranch = &script;
 }
 
 ul_driver::~ul_driver()
@@ -45,7 +44,7 @@ void ul_driver::pushLine()
 
 void ul_driver::popLineToScript()
 {
-    currentBranch->push_back(lineStack.top());
+    getCurrentBranch()->push_back(getCurrentLine());
     lineStack.pop();
     std::cout<<"line added\n";
 }
@@ -69,7 +68,7 @@ void ul_driver::printScript(std::vector<dialogueLine>* script)
             std::cout<<"NEW BRANCH - OPTION 1 *******************"<<std::endl;
             printScript(&(*it).branch1);
             std::cout<<"NEW BRANCH - OPTION 2 *******************"<<std::endl;
-            printScript(&(*it).branch1);
+            printScript(&(*it).branch2);
             std::cout<<"END OF BRANCH *******************"<<std::endl;
         }
         else
@@ -99,38 +98,41 @@ void ul_driver::printLine(dialogueLine line)
 void ul_driver::pushBranch()
 {
     //lineStack.push(line);
-    currentBranch = &lineStack.top().branch1;
-    isProcessingBranch1 = true;
+    branchStack.push(&getCurrentLine().branch1);
+    //isProcessingBranch1 = true;
     std::cout<<"branch pushed\n";
 }
 
 void ul_driver::switchToBranch2()
 {
-    currentBranch = &lineStack.top().branch2;
-    isProcessingBranch1 = false;
+    branchStack.pop();
+    branchStack.push(&getCurrentLine().branch2);
+    //isProcessingBranch1 = false;
     std::cout<<"branch switched\n";
 }
 
 void ul_driver::popBranch()
 {
-    if (!lineStack.empty())
+    /*if (!lineStack.empty())
     {
-        if (isProcessingBranch1)
-        {
-            currentBranch = &lineStack.top().branch1;
-            std::cout<<"popped to branch 1\n";
-        }
-        else
-        {
-            currentBranch = &lineStack.top().branch2;
-            std::cout<<"popped to branch 2\n";
-        }
+        currentBranch = &lineStack.top().branch2;
+        std::cout<<"popped branch\n";
     }
     else
     {
         std::cout<<"invalid pointer, dummy"<<std::endl;
-        currentBranch = &script;
+    }*/
+    branchStack.pop();
+}
+
+std::vector<dialogueLine>* ul_driver::getCurrentBranch()
+{
+    if (!branchStack.empty())
+    {
+        return branchStack.top();
     }
-    
-    //lineStack.pop();
+    else
+    {
+        return &script;
+    }
 }

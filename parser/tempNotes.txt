@@ -1,0 +1,30 @@
+regular line:
+    push a new temp line on to the stack
+    modify it with the info provided
+    pop it from the stack and add to the current branch (usually main script)
+    
+branching line:
+    push a new temp line on to the stack
+    modify it with the info provided
+    discover that it needs to process a subtree
+    change the current branch pointer to the stack top's first branch
+	process regular lines
+    change to the second branch
+	process more lines
+    change the branch pointer to where it was: main script or first/second branch of a parent line?
+    pop it from the stack and add to the current branch
+    
+regular order:
+    character_identifier
+    regular_line
+    item
+    
+branching order:
+    character_identifier
+    regular_line
+    options
+	item_list
+    option_branch_1
+	item_list
+    option_branch_2
+    item

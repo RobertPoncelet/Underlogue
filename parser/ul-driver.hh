@@ -26,6 +26,11 @@ public:
   void pushLine();
   void popLineToScript();
   dialogueLine& getCurrentLine();
+  
+  void pushBranch();
+  void switchToBranch2();
+  void popBranch();
+  std::vector<dialogueLine>* getCurrentBranch();
 
   int result;
   // Handling the scanner.
@@ -44,15 +49,12 @@ public:
   void error (const yy::location& l, const std::string& m);
   void error (const std::string& m);
   
-  void pushBranch();
-  void switchToBranch2();
-  void popBranch();
-  
   void printScript(std::vector<dialogueLine>* script);
   void printLine(dialogueLine line);
   
 private:
   std::stack<dialogueLine> lineStack;
-  std::vector<dialogueLine>* currentBranch;
+  std::stack< std::vector<dialogueLine>* >branchStack;
+  //std::vector<dialogueLine>* currentBranch;
 };
 #endif // ! UL_DRIVER_HH
