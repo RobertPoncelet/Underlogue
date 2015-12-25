@@ -558,14 +558,14 @@ static yyconst flex_int16_t yy_rule_linenum[13] =
 #define YY_MORE_ADJ 0
 #define YY_RESTORE_YY_MORE_OFFSET
 char *yytext;
-#line 1 "calc++-scanner.ll"
-#line 2 "calc++-scanner.ll"
+#line 1 "ul-scanner.ll"
+#line 2 "ul-scanner.ll"
 # include <cerrno>
 # include <climits>
 # include <cstdlib>
 # include <string>
-# include "calc++-driver.hh"
-# include "calc++-parser.hh"
+# include "ul-driver.hh"
+# include "ul-parser.hh"
 
 // Work around an incompatibility in flex (at least versions
 // 2.5.31 through 2.5.33): it generates code that does
@@ -577,7 +577,7 @@ char *yytext;
 // The location of the current token.
 static yy::location loc;
 #define YY_NO_INPUT 1
-#line 25 "calc++-scanner.ll"
+#line 25 "ul-scanner.ll"
   // Code run each time a pattern is matched.
   # define YY_USER_ACTION  loc.columns (yyleng);
 #line 584 "lex.yy.c"
@@ -825,7 +825,7 @@ YY_DECL
 	register int yy_act;
     
 /* %% [7.0] user's declarations go here */
-#line 29 "calc++-scanner.ll"
+#line 29 "ul-scanner.ll"
 
 
 
@@ -945,53 +945,53 @@ do_action:	/* This label is used only to access EOF actions. */
 
 case 1:
 YY_RULE_SETUP
-#line 36 "calc++-scanner.ll"
+#line 36 "ul-scanner.ll"
 loc.step ();
 	YY_BREAK
 case 2:
 /* rule 2 can match eol */
 YY_RULE_SETUP
-#line 37 "calc++-scanner.ll"
+#line 37 "ul-scanner.ll"
 loc.lines (yyleng); loc.step ();
 	YY_BREAK
 case 3:
 YY_RULE_SETUP
-#line 38 "calc++-scanner.ll"
+#line 38 "ul-scanner.ll"
 return yy::calcxx_parser::make_MINUS(loc);
 	YY_BREAK
 case 4:
 YY_RULE_SETUP
-#line 39 "calc++-scanner.ll"
+#line 39 "ul-scanner.ll"
 return yy::calcxx_parser::make_PLUS(loc);
 	YY_BREAK
 case 5:
 YY_RULE_SETUP
-#line 40 "calc++-scanner.ll"
+#line 40 "ul-scanner.ll"
 return yy::calcxx_parser::make_STAR(loc);
 	YY_BREAK
 case 6:
 YY_RULE_SETUP
-#line 41 "calc++-scanner.ll"
+#line 41 "ul-scanner.ll"
 return yy::calcxx_parser::make_SLASH(loc);
 	YY_BREAK
 case 7:
 YY_RULE_SETUP
-#line 42 "calc++-scanner.ll"
+#line 42 "ul-scanner.ll"
 return yy::calcxx_parser::make_LPAREN(loc);
 	YY_BREAK
 case 8:
 YY_RULE_SETUP
-#line 43 "calc++-scanner.ll"
+#line 43 "ul-scanner.ll"
 return yy::calcxx_parser::make_RPAREN(loc);
 	YY_BREAK
 case 9:
 YY_RULE_SETUP
-#line 44 "calc++-scanner.ll"
+#line 44 "ul-scanner.ll"
 return yy::calcxx_parser::make_ASSIGN(loc);
 	YY_BREAK
 case 10:
 YY_RULE_SETUP
-#line 47 "calc++-scanner.ll"
+#line 47 "ul-scanner.ll"
 {
   errno = 0;
   long n = strtol (yytext, NULL, 10);
@@ -1002,21 +1002,21 @@ YY_RULE_SETUP
 	YY_BREAK
 case 11:
 YY_RULE_SETUP
-#line 55 "calc++-scanner.ll"
+#line 55 "ul-scanner.ll"
 return yy::calcxx_parser::make_IDENTIFIER(yytext, loc);
 	YY_BREAK
 case 12:
 YY_RULE_SETUP
-#line 56 "calc++-scanner.ll"
+#line 56 "ul-scanner.ll"
 driver.error (loc, "invalid character");
 	YY_BREAK
 case YY_STATE_EOF(INITIAL):
-#line 57 "calc++-scanner.ll"
+#line 57 "ul-scanner.ll"
 return yy::calcxx_parser::make_END(loc);
 	YY_BREAK
 case 13:
 YY_RULE_SETUP
-#line 58 "calc++-scanner.ll"
+#line 58 "ul-scanner.ll"
 ECHO;
 	YY_BREAK
 #line 1023 "lex.yy.c"
@@ -2110,7 +2110,7 @@ void yyfree (void * ptr )
 
 /* %ok-for-header */
 
-#line 58 "calc++-scanner.ll"
+#line 58 "ul-scanner.ll"
 
 
 
