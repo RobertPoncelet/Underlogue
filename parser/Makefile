@@ -1,16 +1,17 @@
 all: test.out
+#all: ul-driver.o ul-parser.o ul-scanner.o
 
 test.out: ul-driver.o ul-parser.o ul-scanner.o test.o
 
-	g++ -o test.out ul-driver.o ul-parser.o ul-scanner.o test.o
+	g++ -m64 -o test.out ul-driver.o ul-parser.o ul-scanner.o test.o
 
 ul-driver.o: ul-driver.cc ul-driver.hh ul-parser.hh
 
-	g++ -c ul-driver.cc
+	g++ -c -m64 -pipe -g -std=c++0x -Wall -W -fPIE -DQT_QML_DEBUG ul-driver.cc
 
 ul-parser.o: ul-parser.cc ul-parser.hh ul-driver.hh
 
-	g++ -c ul-parser.cc
+	g++ -c -m64 -pipe -g -std=c++0x -Wall -W -fPIE -DQT_QML_DEBUG ul-parser.cc
 
 ul-parser.cc ul-parser.hh: ul-parser.yy
 
@@ -18,7 +19,7 @@ ul-parser.cc ul-parser.hh: ul-parser.yy
 
 ul-scanner.o: ul-scanner.cc ul-parser.hh ul-driver.hh
 
-	g++ -c ul-scanner.cc
+	g++ -c -m64 -pipe -g -std=c++0x -Wall -W -fPIE -DQT_QML_DEBUG ul-scanner.cc
 
 ul-scanner.cc: ul-scanner.ll
 
@@ -26,7 +27,7 @@ ul-scanner.cc: ul-scanner.ll
 
 test.o: test.cc
 
-	g++ -c test.cc
+	g++ -c -m64 -pipe -g -std=c++0x -Wall -W -fPIE -DQT_QML_DEBUG test.cc
 
 .PHONY: clean
 

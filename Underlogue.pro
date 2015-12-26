@@ -7,9 +7,9 @@ SOURCES += \
     src/main.cpp \
     src/ulAssetManager.cpp \
     src/ulScriptReader.cpp \
-    parser/test.cc \
+    #parser/test.cc \
     parser/ul-driver.cc \
-    parser/lex.yy.c
+    #parser/lex.yy.cpp
 
 INCLUDEPATH +=./include ./parser
 HEADERS += \
@@ -20,10 +20,6 @@ HEADERS += \
 
 DISTFILES += \
     parser/parser.mk \
-    parser/scriptTest.txt \
-    parser/scriptTestBranch.txt \
-    parser/scriptTestSimple.txt \
-    parser/tempNotes.txt \
-    parser/ul-parser.yy \
     parser/ul-scanner.ll \
+    parser/ul-parser.yy \
     parser/Makefile

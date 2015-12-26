@@ -6,7 +6,7 @@
 //#include <map>
 #include <vector>
 #include <stack>
-#include "parser/ul-parser.hh"
+#include "ul-parser.hh"
 #include "dialogue.h"
 // Tell Flex the lexer's prototype ...
 #define YY_DECL \
