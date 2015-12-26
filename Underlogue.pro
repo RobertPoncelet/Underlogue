@@ -9,7 +9,6 @@ SOURCES += \
     src/ulScriptReader.cpp \
     #parser/test.cc \
     parser/ul-driver.cc \
-    #parser/lex.yy.cpp
 
 INCLUDEPATH +=./include ./parser
 HEADERS += \
@@ -23,3 +22,5 @@ DISTFILES += \
     parser/ul-scanner.ll \
     parser/ul-parser.yy \
     parser/Makefile
+
+LIBS += parser/ul-parser.o parser/ul-scanner.o
