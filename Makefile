@@ -41,18 +41,20 @@ MKDIR         = mkdir -p
 
 ####### Output directory
 
-OBJECTS_DIR   = ./
+OBJECTS_DIR   = obj/
 
 ####### Files
 
 SOURCES       = src/main.cpp \
 		src/ulAssetManager.cpp \
 		src/ulScriptReader.cpp \
-		parser/ul-driver.cc 
-OBJECTS       = main.o \
-		ulAssetManager.o \
-		ulScriptReader.o \
-		ul-driver.o
+		parser/ul-driver.cc \
+		src/uldialoguebox.cpp 
+OBJECTS       = obj/main.o \
+		obj/ulAssetManager.o \
+		obj/ulScriptReader.o \
+		obj/ul-driver.o \
+		obj/uldialoguebox.o
 DIST          = parser/parser.mk \
 		parser/ul-scanner.ll \
 		parser/ul-parser.yy \
@@ -259,8 +261,8 @@ qmake: FORCE
 qmake_all: FORCE
 
 dist: 
-	@test -d .tmp/Underlogue1.0.0 || mkdir -p .tmp/Underlogue1.0.0
-	$(COPY_FILE) --parents $(SOURCES) $(DIST) .tmp/Underlogue1.0.0/ && (cd `dirname .tmp/Underlogue1.0.0` && $(TAR) Underlogue1.0.0.tar Underlogue1.0.0 && $(COMPRESS) Underlogue1.0.0.tar) && $(MOVE) `dirname .tmp/Underlogue1.0.0`/Underlogue1.0.0.tar.gz . && $(DEL_FILE) -r .tmp/Underlogue1.0.0
+	@test -d obj/Underlogue1.0.0 || mkdir -p obj/Underlogue1.0.0
+	$(COPY_FILE) --parents $(SOURCES) $(DIST) obj/Underlogue1.0.0/ && (cd `dirname obj/Underlogue1.0.0` && $(TAR) Underlogue1.0.0.tar Underlogue1.0.0 && $(COMPRESS) Underlogue1.0.0.tar) && $(MOVE) `dirname obj/Underlogue1.0.0`/Underlogue1.0.0.tar.gz . && $(DEL_FILE) -r obj/Underlogue1.0.0
 
 
 clean:compiler_clean 
@@ -287,27 +289,32 @@ compiler_clean:
 
 ####### Compile
 
-main.o: src/main.cpp parser/ul-driver.hh \
+obj/main.o: src/main.cpp parser/ul-driver.hh \
 		parser/ul-parser.hh \
 		parser/stack.hh \
 		parser/location.hh \
 		parser/position.hh \
 		parser/dialogue.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o main.o src/main.cpp
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o obj/main.o src/main.cpp
 
-ulAssetManager.o: src/ulAssetManager.cpp include/ulAssetManager.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o ulAssetManager.o src/ulAssetManager.cpp
+obj/ulAssetManager.o: src/ulAssetManager.cpp include/ulAssetManager.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o obj/ulAssetManager.o src/ulAssetManager.cpp
 
-ulScriptReader.o: src/ulScriptReader.cpp include/ulScriptReader.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o ulScriptReader.o src/ulScriptReader.cpp
+obj/ulScriptReader.o: src/ulScriptReader.cpp include/ulScriptReader.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o obj/ulScriptReader.o src/ulScriptReader.cpp
 
-ul-driver.o: parser/ul-driver.cc parser/ul-driver.hh \
+obj/ul-driver.o: parser/ul-driver.cc parser/ul-driver.hh \
 		parser/ul-parser.hh \
 		parser/stack.hh \
 		parser/location.hh \
 		parser/position.hh \
 		parser/dialogue.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o ul-driver.o parser/ul-driver.cc
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o obj/ul-driver.o parser/ul-driver.cc
+
+obj/uldialoguebox.o: src/uldialoguebox.cpp include/uldialoguebox.h \
+		parser/dialogue.h \
+		include/ulAssetManager.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o obj/uldialoguebox.o src/uldialoguebox.cpp
 
 ####### Install
 

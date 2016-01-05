@@ -4,12 +4,13 @@
 #include <string>
 #include <vector>
 #include <map>
+#include <rapidjson/document.h>
 
 struct lineAsset
 {
 	std::vector<std::string> avatar;
 	std::string sound;
-	int printSpeed;
+    float printSpeed;
 };
 
 class ulAssetManager
@@ -23,6 +24,7 @@ public:
 	
 private:
 	std::map<std::pair<std::string, std::string>, lineAsset> assets;
+    rapidjson::Document doc;
 };
 
 #endif

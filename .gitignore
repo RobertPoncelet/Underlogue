@@ -37,4 +37,15 @@
 *.autosave
 
 # Actual program
-underlogue
+Underlogue
+
+# Other shit
+parser/.deps/
+parser/location.hh
+parser/position.hh
+parser/stack.hh
+parser/ul-parser.cc
+parser/ul-parser.hh
+parser/ul-scanner.cc
+parserTest/underlogueParser
+

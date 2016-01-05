@@ -1,0 +1,26 @@
+{
+    "Alphys":
+    {
+        "Default":
+        {
+            "sprites": [ "art/alphys/alphys_0_0.txt" ],
+            "speed": 1.0,
+            "sound": "sound/voice_alphys.wav"
+        },
+        "Hidden":
+        {
+            "sprites": [ null ],
+            "speed": 1.0,
+            "sound": "sound/voice_alphys.wav"
+        }
+    },
+    "Default":
+    {
+        "Default":
+        {
+            "sprites": [ null ],
+            "speed": 1.0,
+            "sound": "sound/voice_generic.wav"
+        }
+    }
+}

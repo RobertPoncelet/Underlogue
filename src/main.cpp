@@ -8,6 +8,7 @@
 
 //#include "ulScriptReader.h"
 #include "ul-driver.hh"
+#include "ulAssetManager.h"
 
 int main(int argc, char* argv[])
 {	
@@ -35,6 +36,11 @@ int main(int argc, char* argv[])
     }
       
     driver.printScript(&driver.script);
+
+    ulAssetManager assMan; // oh yes bby~
+    lineAsset ass = assMan.get("Alphys", "");
+    std::cout<<ass.avatar[0];
+    lineAsset invalidAss = assMan.get("i don't exist", "lmao");
 
     return EXIT_SUCCESS;
 }
