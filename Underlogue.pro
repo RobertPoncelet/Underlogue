@@ -11,7 +11,8 @@ SOURCES += \
     src/ulScriptReader.cpp \
     #parser/test.cc \
     parser/ul-driver.cc \
-    src/uldialoguebox.cpp
+    src/ulDialogueBox.cpp \
+    src/ulApplication.cpp
 
 INCLUDEPATH +=./include ./parser
 HEADERS += \
@@ -19,7 +20,9 @@ HEADERS += \
     include/ulScriptReader.h \
     parser/dialogue.h \
     parser/ul-driver.hh \
-    include/uldialoguebox.h
+    include/ulDialogueBox.h \
+    include/ulApplication.h \
+    include/ulLabel.h
 
 DISTFILES += \
     parser/parser.mk \
@@ -27,6 +30,9 @@ DISTFILES += \
     parser/ul-parser.yy \
     parser/Makefile
 
-LIBS += parser/ul-parser.o parser/ul-scanner.o
+QMAKE_LFLAGS += -static
+
+LIBS += parser/ul-parser.o parser/ul-scanner.o -lncurses++ -lform -lmenu -lpanel -lncurses -lutil \
+    -lstdc++
 
 OBJECTS_DIR = ./obj
