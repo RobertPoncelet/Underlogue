@@ -12,7 +12,8 @@ SOURCES += \
     #parser/test.cc \
     parser/ul-driver.cc \
     src/ulDialogueBox.cpp \
-    src/ulApplication.cpp
+    src/ulApplication.cpp \
+    src/ulDialogueOption.cpp
 
 INCLUDEPATH +=./include ./parser
 HEADERS += \
@@ -22,7 +23,8 @@ HEADERS += \
     parser/ul-driver.hh \
     include/ulDialogueBox.h \
     include/ulApplication.h \
-    include/ulLabel.h
+    include/ulLabel.h \
+    include/ulDialogueOption.h
 
 DISTFILES += \
     parser/parser.mk \

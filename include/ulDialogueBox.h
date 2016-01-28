@@ -7,57 +7,40 @@
 #include "cursesf.h"
 
 #include <vector>
+#include <iostream>
 #include "dialogue.h"
 #include "ulAssetManager.h"
 #include "ulLabel.h"
 
-class ulDialogueBox : public NCursesForm
+class ulDialogueBox : public NCursesMenu
 {
 private:
-  NCursesFormField** F;
-  //MyFieldType* mft;
-  Integer_Field *ift;
-  Enumeration_Field *eft;
-
-  static const char *weekdays[];
+  NCursesPanel* P;
+  NCursesMenuItem** I;
+  //UserData *u;
+  #define n_items 2
 
 public:
   ulDialogueBox()
-    : NCursesForm(13, 51, (lines() - 15)/2, (cols() - 53)/2),
-      F(0),
-      //mft(0),
-      ift(0),
-      eft(0)
+    : NCursesMenu (n_items+2, 8, (lines()-10)/2, (cols()-10)/2),
+      P(0), I(0)//, u(0)
   {
+    //u = new UserData(1);
+    I = new NCursesMenuItem*[1+n_items];
+    I[0] = new NCursesMenuItem("Option A", "something");
+    I[1] = new NCursesMenuItem("Option B", "something else");
+    //I[2] = new MyAction<UserData> ("Silly", u);
+    //I[3] = new FormAction("Form");
+    //I[4] = new PadAction("Pad");
+    //I[5] = new ScanAction("Scan");
+    //I[6] = new QuitItem();
+    I[2] = new NCursesMenuItem(); // Terminating empty item
 
-    F     = new NCursesFormField*[10];
-    //mft   = new MyFieldType('X');
-    ift   = new Integer_Field(0, 1, 10);
-    eft   = new Enumeration_Field(weekdays);
+    InitMenu(I, TRUE, TRUE);
 
-    F[0]  = new ulLabel("Demo Entry Form", 0, 16);
-    F[1]  = new ulLabel("Weekday Enum", 2, 1);
-    F[2]  = new ulLabel("Number(1-10)", 2, 21);
-    F[3]  = new ulLabel("Only 'X'", 2, 35);
-    F[4]  = new ulLabel("Multiline Field (Dynamic and Scrollable)", 5, 1);
-    F[5]  = new NCursesFormField(1, 18, 3, 1);
-    F[6]  = new NCursesFormField(1, 12, 3, 21);
-    F[7]  = new NCursesFormField(1, 12, 3, 35);
-    F[8]  = new NCursesFormField(4, 46, 6, 1, 2);
-    F[9]  = new NCursesFormField();
-
-    InitForm(F, TRUE, TRUE);
-    boldframe();
-
-    F[5]->set_fieldtype(*eft);
-    F[6]->set_fieldtype(*ift);
-
-//    F[7]->set_fieldtype(*mft);
-//    F[7]->set_maximum_growth(20); // max. 20 characters
-//    F[7]->options_off(O_STATIC);  // make field dynamic
-
-    F[7]->set_maximum_growth(10); // max. 10 lines
-    F[7]->options_off(O_STATIC);  // make field dynamic
+    P = new NCursesPanel(1, n_items, LINES-1, 1);
+    boldframe("oh", "shit");
+    P->show();
   }
 
   ulDialogueBox& operator=(const ulDialogueBox& rhs)
@@ -69,14 +52,50 @@ public:
   }
 
   ulDialogueBox(const ulDialogueBox& rhs)
-    : NCursesForm(rhs), F(0), /*mft(0),*/ ift(0), eft(0)
+    : NCursesMenu(rhs), P(0), I(0)//, u(0)
   {
   }
 
-  ~ulDialogueBox() {
-    //delete mft;
-    delete ift;
-    delete eft;
+  ~ulDialogueBox()
+  {
+    P->hide();
+    delete P;
+    //delete u;
+  }
+
+  virtual void On_Menu_Init()
+  {
+    NCursesWindow W(::stdscr);
+    P->move(0, 0);
+    P->clrtoeol();
+    for(int i=1; i<=count(); i++)
+      P->addch('0' + i);
+    P->bkgd(W.getbkgd());
+    refresh();
+  }
+
+  virtual void On_Menu_Termination()
+  {
+    P->move(0, 0);
+    P->clrtoeol();
+    refresh();
+  }
+
+  virtual void On_Item_Init(NCursesMenuItem& item)
+  {
+    P->move(0, item.index());
+    P->attron(A_REVERSE);
+    P->printw("%1d", 1+item.index());
+    P->attroff(A_REVERSE);
+    refresh();
+  }
+
+  virtual void On_Item_Termination(NCursesMenuItem& item)
+  {
+    P->move(0, item.index());
+    P->attroff(A_REVERSE);
+    P->printw("%1d", 1+item.index());
+    refresh();
   }
 
 // original stuff holy shit

@@ -19,7 +19,6 @@ protected:
 public:
   ulApplication() : NCursesApplication(TRUE)
   {
-    std::cout<<"hey i got this far"<<std::endl;
   }
 
   int run();

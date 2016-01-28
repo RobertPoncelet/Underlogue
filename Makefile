@@ -50,13 +50,15 @@ SOURCES       = src/main.cpp \
 		src/ulScriptReader.cpp \
 		parser/ul-driver.cc \
 		src/ulDialogueBox.cpp \
-		src/ulApplication.cpp 
+		src/ulApplication.cpp \
+		src/ulDialogueOption.cpp 
 OBJECTS       = obj/main.o \
 		obj/ulAssetManager.o \
 		obj/ulScriptReader.o \
 		obj/ul-driver.o \
 		obj/ulDialogueBox.o \
-		obj/ulApplication.o
+		obj/ulApplication.o \
+		obj/ulDialogueOption.o
 DIST          = parser/parser.mk \
 		parser/ul-scanner.ll \
 		parser/ul-parser.yy \
@@ -327,6 +329,9 @@ obj/ulApplication.o: src/ulApplication.cpp include/ulDialogueBox.h \
 		include/ulLabel.h \
 		include/ulApplication.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o obj/ulApplication.o src/ulApplication.cpp
+
+obj/ulDialogueOption.o: src/ulDialogueOption.cpp include/ulDialogueOption.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o obj/ulDialogueOption.o src/ulDialogueOption.cpp
 
 ####### Install
 
