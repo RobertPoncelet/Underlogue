@@ -20,7 +20,7 @@ public:
   ulApplication() : NCursesApplication(TRUE)
   {
   }
-
+  chtype backgrounds() const;
   int run();
 };
 

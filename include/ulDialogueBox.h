@@ -30,12 +30,12 @@ public:
     I = new NCursesMenuItem*[1+n_items];
     //I[0] = new MyAction("Option A", "something");
     //I[1] = new MyAction("Option B", "something else");
-    I[0] = new MyAction<UserData> ("Silly", u);
-    I[1] = new MyAction<UserData> ("Silly", u);
+    I[0] = new ulDialogueOption<UserData> ("Silly", u);
+    //I[1] = new ulDialogueOption<UserData> ("Silly", u);
     //I[3] = new FormAction("Form");
     //I[4] = new PadAction("Pad");
     //I[5] = new ScanAction("Scan");
-    //I[6] = new QuitItem();
+    I[1] = new QuitItem();
     I[2] = new NCursesMenuItem(); // Terminating empty item
 
     InitMenu(I, TRUE, TRUE);
@@ -70,8 +70,8 @@ public:
     NCursesWindow W(::stdscr);
     P->move(0, 0);
     P->clrtoeol();
-    for(int i=1; i<=count(); i++)
-      P->addch('0' + i);
+    for(int i=1; i<count(); i++)
+      P->addch('#');
     P->bkgd(W.getbkgd());
     refresh();
   }

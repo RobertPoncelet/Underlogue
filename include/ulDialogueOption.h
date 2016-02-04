@@ -63,24 +63,36 @@ public:
 //
 // -------------------------------------------------------------------------
 //
-template<class T> class MyAction : public NCursesUserItem<T>
+template<class T> class ulDialogueOption : public NCursesUserItem<T>
 {
 public:
-  MyAction (const char* p_name,
+  ulDialogueOption (const char* p_name,
             const T* p_UserData)
     : NCursesUserItem<T>(p_name, static_cast<const char*>(0), p_UserData)
   {}
 
-  virtual ~MyAction() {}
+  virtual ~ulDialogueOption() {}
 
   bool action() {
     //SillyDemo a;
     //a.run(NCursesUserItem<T>::UserData()->sleeptime());
+    std::cout<<"arse\n";
     return FALSE;
   }
 };
 
-template class MyAction<UserData>;
+template class ulDialogueOption<UserData>;
 template class NCURSES_IMPEXP NCursesUserItem<UserData>;
+
+class QuitItem : public NCursesMenuItem
+{
+public:
+  QuitItem() : NCursesMenuItem("Quit") {
+  }
+
+  bool action() {
+    return TRUE;
+  }
+};
 
 #endif // ULDIALOGUEOPTION_H
