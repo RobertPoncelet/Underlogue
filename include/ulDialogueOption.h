@@ -52,4 +52,35 @@ private:
 template class ulDialogueOption<ulDialogueOptionType>;
 template class NCURSES_IMPEXP NCursesUserItem<ulDialogueOptionType>;*/
 
+class UserData
+{
+private:
+  int u;
+public:
+  UserData(int x) : u(x) {}
+  int sleeptime() const { return u; }
+};
+//
+// -------------------------------------------------------------------------
+//
+template<class T> class MyAction : public NCursesUserItem<T>
+{
+public:
+  MyAction (const char* p_name,
+            const T* p_UserData)
+    : NCursesUserItem<T>(p_name, static_cast<const char*>(0), p_UserData)
+  {}
+
+  virtual ~MyAction() {}
+
+  bool action() {
+    //SillyDemo a;
+    //a.run(NCursesUserItem<T>::UserData()->sleeptime());
+    return FALSE;
+  }
+};
+
+template class MyAction<UserData>;
+template class NCURSES_IMPEXP NCursesUserItem<UserData>;
+
 #endif // ULDIALOGUEOPTION_H

@@ -10,6 +10,7 @@
 #include <iostream>
 #include "dialogue.h"
 #include "ulAssetManager.h"
+#include "ulDialogueOption.h"
 #include "ulLabel.h"
 
 class ulDialogueBox : public NCursesMenu
@@ -17,19 +18,20 @@ class ulDialogueBox : public NCursesMenu
 private:
   NCursesPanel* P;
   NCursesMenuItem** I;
-  //UserData *u;
+  UserData *u;
   #define n_items 2
 
 public:
   ulDialogueBox()
     : NCursesMenu (n_items+2, 8, (lines()-10)/2, (cols()-10)/2),
-      P(0), I(0)//, u(0)
+      P(0), I(0), u(0)
   {
-    //u = new UserData(1);
+    u = new UserData(1);
     I = new NCursesMenuItem*[1+n_items];
-    I[0] = new NCursesMenuItem("Option A", "something");
-    I[1] = new NCursesMenuItem("Option B", "something else");
-    //I[2] = new MyAction<UserData> ("Silly", u);
+    //I[0] = new MyAction("Option A", "something");
+    //I[1] = new MyAction("Option B", "something else");
+    I[0] = new MyAction<UserData> ("Silly", u);
+    I[1] = new MyAction<UserData> ("Silly", u);
     //I[3] = new FormAction("Form");
     //I[4] = new PadAction("Pad");
     //I[5] = new ScanAction("Scan");
@@ -52,7 +54,7 @@ public:
   }
 
   ulDialogueBox(const ulDialogueBox& rhs)
-    : NCursesMenu(rhs), P(0), I(0)//, u(0)
+    : NCursesMenu(rhs), P(0), I(0), u(0)
   {
   }
 
@@ -60,7 +62,7 @@ public:
   {
     P->hide();
     delete P;
-    //delete u;
+    delete u;
   }
 
   virtual void On_Menu_Init()
