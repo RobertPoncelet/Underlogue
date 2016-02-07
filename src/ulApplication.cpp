@@ -2,6 +2,7 @@
 //#include <nc_string.h>
 #include <iostream>
 
+#include "ulScriptReader.h"
 #include "ulDialogueBox.h"
 #include "ulApplication.h"
 
@@ -22,7 +23,6 @@ void ulApplication::title()
   const char * const titleText = "Simple C++ Binding Demo";
   const int len = ::strlen(titleText);
 
-  ulApplication::
   titleWindow->bkgd(backgrounds());
   titleWindow->addstr(0, (titleWindow->cols() - len)/2, titleText);
   titleWindow->noutrefresh();
@@ -30,6 +30,8 @@ void ulApplication::title()
 
 int ulApplication::run()
 {
+  ulScriptReader sr();
+  sr.parseArguments(2);
   ulDialogueBox M;
   M();
   return 0;

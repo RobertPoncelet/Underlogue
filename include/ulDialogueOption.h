@@ -77,6 +77,7 @@ public:
     //SillyDemo a;
     //a.run(NCursesUserItem<T>::UserData()->sleeptime());
     std::cout<<"arse\n";
+    mvprintw(0,0,"piss");
     return FALSE;
   }
 };

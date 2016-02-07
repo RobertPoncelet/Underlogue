@@ -45,15 +45,13 @@ OBJECTS_DIR   = obj/
 
 ####### Files
 
-SOURCES       = src/main.cpp \
-		src/ulAssetManager.cpp \
+SOURCES       = src/ulAssetManager.cpp \
 		src/ulScriptReader.cpp \
 		parser/ul-driver.cc \
 		src/ulDialogueBox.cpp \
 		src/ulApplication.cpp \
 		src/ulDialogueOption.cpp 
-OBJECTS       = obj/main.o \
-		obj/ulAssetManager.o \
+OBJECTS       = obj/ulAssetManager.o \
 		obj/ulScriptReader.o \
 		obj/ul-driver.o \
 		obj/ulDialogueBox.o \
@@ -293,16 +291,6 @@ compiler_clean:
 
 ####### Compile
 
-obj/main.o: src/main.cpp parser/ul-driver.hh \
-		parser/ul-parser.hh \
-		parser/stack.hh \
-		parser/location.hh \
-		parser/position.hh \
-		parser/dialogue.h \
-		include/ulAssetManager.h \
-		include/ulApplication.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o obj/main.o src/main.cpp
-
 obj/ulAssetManager.o: src/ulAssetManager.cpp include/ulAssetManager.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o obj/ulAssetManager.o src/ulAssetManager.cpp
 
@@ -320,12 +308,14 @@ obj/ul-driver.o: parser/ul-driver.cc parser/ul-driver.hh \
 obj/ulDialogueBox.o: src/ulDialogueBox.cpp include/ulDialogueBox.h \
 		parser/dialogue.h \
 		include/ulAssetManager.h \
+		include/ulDialogueOption.h \
 		include/ulLabel.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o obj/ulDialogueBox.o src/ulDialogueBox.cpp
 
 obj/ulApplication.o: src/ulApplication.cpp include/ulDialogueBox.h \
 		parser/dialogue.h \
 		include/ulAssetManager.h \
+		include/ulDialogueOption.h \
 		include/ulLabel.h \
 		include/ulApplication.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o obj/ulApplication.o src/ulApplication.cpp
