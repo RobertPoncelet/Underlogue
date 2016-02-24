@@ -10,28 +10,17 @@
 #include <iostream>
 #include "dialogue.h"
 #include "ulAssetManager.h"
-#include "ulDialogueOption.h"
-#include "ulLabel.h"
-
-class ulDialogueBox : public NCursesMenu
-{
-private:
-  NCursesPanel* P;
-  NCursesMenuItem** I;
-  UserData *u;
-  #define n_items 2
-
-public:
-  ulDialogueBox();
-  ulDialogueBox& operator=(const ulDialogueBox& rhs);
-  ulDialogueBox(const ulDialogueBox& rhs);
-  ~ulDialogueBox();
-  virtual void On_Menu_Init();
-  virtual void On_Menu_Termination();
-  virtual void On_Item_Init(NCursesMenuItem& item);
-  virtual void On_Item_Termination(NCursesMenuItem& item);
+//#include "ulDialogueOption.h"
+//#include "ulLabel.h"
 
 // original stuff holy shit
+
+class ulDialogueBox
+{
+public:
+    ulDialogueBox(const std::vector<dialogueLine> &newScript);
+    ~ulDialogueBox();
+    void show();
 
 private:
     ulAssetManager assetManager;

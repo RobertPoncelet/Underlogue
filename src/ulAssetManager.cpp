@@ -9,9 +9,9 @@
 #include "rapidjson/stringbuffer.h"
 #include "ulAssetManager.h"
 
-ulAssetManager::ulAssetManager()
+ulAssetManager::ulAssetManager(std::string artFilePath)
 {
-    std::ifstream artFile("art/art.json");
+    std::ifstream artFile(artFilePath);
     if (!artFile.is_open())
     {
         std::cerr<<"Could not open art definition file (art/art.json)"<<std::endl;

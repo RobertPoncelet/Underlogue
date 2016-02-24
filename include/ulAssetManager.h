@@ -16,7 +16,7 @@ struct lineAsset
 class ulAssetManager
 {
 public:
-	ulAssetManager();
+    ulAssetManager(std::string artFilePath);
 	~ulAssetManager();
 	
     bool preload(std::string character, std::string expression);

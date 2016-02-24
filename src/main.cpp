@@ -10,9 +10,10 @@
 //#include "ulScriptReader.h"
 #include "ul-driver.hh"
 #include "ulAssetManager.h"
-#include "ulApplication.h"
+//#include "ulApplication.h"
+#include "ulDialogueBox.h"
 
-/*int main(int argc, char* argv[])
+int main(int argc, char* argv[])
 {	
     ul_driver driver;
   
@@ -37,17 +38,11 @@
         }
     }
       
-    driver.printScript(&driver.script);
+    //driver.printScript(&driver.script);
 
-    ulAssetManager assMan; // oh yes bby~
-    lineAsset ass = assMan.get("Alphys", "");
-    std::cout<<ass.avatar[0];
-    lineAsset invalidAss = assMan.get("i don't exist", "lmao");
-
-    ulApplication *app = new ulApplication;
-    app->run();
-    delete app;
+    ulDialogueBox diaBox(driver.script);
+    diaBox.show();
 
     return EXIT_SUCCESS;
-}*/
+}
 

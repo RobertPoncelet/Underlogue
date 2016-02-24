@@ -17,8 +17,8 @@ CFLAGS        = -pipe -g -Wall -W -fPIE $(DEFINES)
 CXXFLAGS      = -pipe -g -std=c++11 -Wall -W -fPIE $(DEFINES)
 INCPATH       = -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-clang -I. -Iinclude -Iparser
 LINK          = clang++
-LFLAGS        = -ccc-gcc-name g++ -static
-LIBS          = $(SUBLIBS) parser/ul-parser.o parser/ul-scanner.o -lncurses++ -lform -lmenu -lpanel -lncurses -lutil -lstdc++ 
+LFLAGS        = -ccc-gcc-name g++
+LIBS          = $(SUBLIBS) parser/ul-parser.o parser/ul-scanner.o -lpanel -lncursesw 
 AR            = ar cqs
 RANLIB        = 
 QMAKE         = /usr/lib/x86_64-linux-gnu/qt5/bin/qmake
@@ -45,18 +45,16 @@ OBJECTS_DIR   = obj/
 
 ####### Files
 
-SOURCES       = src/ulAssetManager.cpp \
+SOURCES       = src/main.cpp \
+		src/ulAssetManager.cpp \
 		src/ulScriptReader.cpp \
 		parser/ul-driver.cc \
-		src/ulDialogueBox.cpp \
-		src/ulApplication.cpp \
-		src/ulDialogueOption.cpp 
-OBJECTS       = obj/ulAssetManager.o \
+		src/ulDialogueBox.cpp 
+OBJECTS       = obj/main.o \
+		obj/ulAssetManager.o \
 		obj/ulScriptReader.o \
 		obj/ul-driver.o \
-		obj/ulDialogueBox.o \
-		obj/ulApplication.o \
-		obj/ulDialogueOption.o
+		obj/ulDialogueBox.o
 DIST          = parser/parser.mk \
 		parser/ul-scanner.ll \
 		parser/ul-parser.yy \
@@ -291,6 +289,16 @@ compiler_clean:
 
 ####### Compile
 
+obj/main.o: src/main.cpp parser/ul-driver.hh \
+		parser/ul-parser.hh \
+		parser/stack.hh \
+		parser/location.hh \
+		parser/position.hh \
+		parser/dialogue.h \
+		include/ulAssetManager.h \
+		include/ulDialogueBox.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o obj/main.o src/main.cpp
+
 obj/ulAssetManager.o: src/ulAssetManager.cpp include/ulAssetManager.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o obj/ulAssetManager.o src/ulAssetManager.cpp
 
@@ -307,21 +315,8 @@ obj/ul-driver.o: parser/ul-driver.cc parser/ul-driver.hh \
 
 obj/ulDialogueBox.o: src/ulDialogueBox.cpp include/ulDialogueBox.h \
 		parser/dialogue.h \
-		include/ulAssetManager.h \
-		include/ulDialogueOption.h \
-		include/ulLabel.h
+		include/ulAssetManager.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o obj/ulDialogueBox.o src/ulDialogueBox.cpp
-
-obj/ulApplication.o: src/ulApplication.cpp include/ulDialogueBox.h \
-		parser/dialogue.h \
-		include/ulAssetManager.h \
-		include/ulDialogueOption.h \
-		include/ulLabel.h \
-		include/ulApplication.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o obj/ulApplication.o src/ulApplication.cpp
-
-obj/ulDialogueOption.o: src/ulDialogueOption.cpp include/ulDialogueOption.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o obj/ulDialogueOption.o src/ulDialogueOption.cpp
 
 ####### Install
 
