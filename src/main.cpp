@@ -41,6 +41,7 @@ int main(int argc, char* argv[])
     //driver.printScript(&driver.script);
 
     ulDialogueBox diaBox(driver.script);
+    diaBox.regenerateWindows(driver.script[0]);
     diaBox.show();
 
     return EXIT_SUCCESS;

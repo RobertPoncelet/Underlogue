@@ -1,10 +1,7 @@
 #ifndef ULDIALOGUEBOX_H
 #define ULDIALOGUEBOX_H
 
-//#include "internal.h"
-#include "cursesapp.h"
-#include "cursesm.h"
-#include "cursesf.h"
+#include <ncursesw/ncurses.h>
 
 #include <vector>
 #include <iostream>
@@ -21,10 +18,23 @@ public:
     ulDialogueBox(const std::vector<dialogueLine> &newScript);
     ~ulDialogueBox();
     void show();
+    void start();
+    void drawBorder();
+    void regenerateWindows(const dialogueLine &line);
 
 private:
+    void resize(int sig);
+
+
     ulAssetManager assetManager;
     std::vector<dialogueLine> script;
+    //int wWidth;
+    //int wHeight;
+
+    WINDOW* wAvatar;
+    WINDOW* wText;
+    WINDOW* wOption1;
+    WINDOW* wOption2;
 
 };
 

@@ -20,7 +20,7 @@ public:
 	~ulAssetManager();
 	
     bool preload(std::string character, std::string expression);
-	lineAsset get(std::string character, std::string expression);
+    lineAsset get(std::string character, std::string expression);
 	
 private:
 	std::map<std::pair<std::string, std::string>, lineAsset> assets;
