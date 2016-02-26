@@ -14,7 +14,7 @@ ulAssetManager::ulAssetManager(std::string artFilePath)
     std::ifstream artFile(artFilePath);
     if (!artFile.is_open())
     {
-        std::cerr<<"Could not open art definition file (art/art.json)"<<std::endl;
+        std::cerr<<"Could not open art definition file ("<<artFilePath<<")"<<std::endl;
     }
     else
     {
@@ -32,6 +32,15 @@ ulAssetManager::~ulAssetManager()
 // Returns true if there was an error preloading this asset, false otherwise
 bool ulAssetManager::preload(std::string character, std::string expression)
 {
+    if (character == "")
+    {
+        character = "Default";
+    }
+    if (expression == "")
+    {
+        expression = "Default";
+    }
+
     std::pair<std::string, std::string> key(character, expression);
     if (assets.find(key) != assets.end())
     {
