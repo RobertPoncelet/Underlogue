@@ -32,13 +32,10 @@ ulAssetManager::~ulAssetManager()
 // Returns true if there was an error preloading this asset, false otherwise
 bool ulAssetManager::preload(std::string character, std::string expression)
 {
-    if (character == "")
+    if (character == "" || expression == "")
     {
-        character = "Default";
-    }
-    if (expression == "")
-    {
-        expression = "Default";
+        // There's nothing to preload so who cares
+        return false;
     }
 
     std::pair<std::string, std::string> key(character, expression);
@@ -139,7 +136,7 @@ lineAsset ulAssetManager::get(std::string character, std::string expression)
     {
         std::cerr<<"No existing asset for "<<character<<" expressing "<<expression<<std::endl;
         std::vector<std::string> avatar;
-        avatar.push_back("I am a total dinkus\n");
+        avatar.push_back("I am a total dingus\n");
         return {avatar, "", 1.0f};
     }
     return assets[key];

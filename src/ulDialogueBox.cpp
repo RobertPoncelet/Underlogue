@@ -47,7 +47,7 @@ void ulDialogueBox::start()
 
 void ulDialogueBox::resize(int sig)
 {
-    std::cout<<"resized!\n"; // TODO: anything whatsoever
+    std::cout<<"resized"<<sig<<std::endl; // TODO: anything whatsoever
 }
 
 void ulDialogueBox::drawBorder()
@@ -77,10 +77,16 @@ void ulDialogueBox::regenerateWindows(const dialogueLine &line)
     // We need to find its dimensions
     int avWidth = 50, avHeight = 0, lineLength = 0;
     auto lineA = assetManager.get(line.character, "Default");
-    std::string frame = lineA.avatar[0];
 
-    if (frame != "")
+    if (lineA.avatar.empty())
     {
+        avWidth = 0;
+        avHeight = 0;
+    }
+    else
+    {
+        std::string frame = lineA.avatar[0];
+
         for (int i = 0; i < (int)frame.length(); ++i)
         {
             ++lineLength;
@@ -98,11 +104,6 @@ void ulDialogueBox::regenerateWindows(const dialogueLine &line)
                 ++avHeight;
             }
         }
-    }
-    else
-    {
-        avWidth = 0;
-        avHeight = 0;
     }
 
     //std::cout<<"width: "<<avWidth<<" height: "<<avHeight<<std::endl;
@@ -178,16 +179,31 @@ CHOICE ulDialogueBox::playLine(const dialogueLine &line)
     //         <<" exp: "<<line.expression
     //         <<" dia: "<<line.dialogue
     //         <<std::endl;
-    regenerateWindows(line);
 
+    regenerateWindows(line);
     drawBorder();
     refresh();
 
-    mvwaddstr(wAvatar,0,0,assetManager.get(line.character, line.expression).avatar[0].c_str());
-    wrefresh(wAvatar);
+    auto avi = assetManager.get(line.character, line.expression).avatar;
+    if (!avi.empty())
+    {
+        mvwaddstr(wAvatar, 0, 0, avi[0].c_str());
+        wrefresh(wAvatar);
+    }
 
-    mvwaddstr(wText,0,0,line.dialogue.c_str());
-    wrefresh(wText);
+    wmove(wText, 0, 0);
+    auto dia = line.dialogue;
+    auto diaIt = dia.begin();
+    int ch = 0;
+    halfdelay(1);
+    while (diaIt != dia.end() && ch != 'X')
+    {
+        waddch(wText, (*diaIt));
+        ++diaIt;
+        wrefresh(wText);
+        ch = getch();
+    }
+    cbreak();
     getch();
 
     return option1;
