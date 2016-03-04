@@ -26,11 +26,16 @@ public:
     void drawBorder();
 
 private:
-    void resize(int sig);
+    static void resize(int sig)
+    {
+        std::cout<<"resized"<<sig<<std::endl; // TODO: anything whatsoever
+    }
     void preloadAssets(const std::vector<dialogueLine> &branch);
     void processBranch(const std::vector<dialogueLine> &branch);
     CHOICE playLine(const dialogueLine &line);
+    void slowPrint(WINDOW* window, std::string text, float speed);
     void regenerateWindows(const dialogueLine &line);
+    void handleResize();
 
     ulAssetManager assetManager;
     std::vector<dialogueLine> script;

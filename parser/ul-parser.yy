@@ -94,10 +94,12 @@ branching_section:
 	
 regular_line:
 	character_identifier COLON STRING_LITERAL				{ std::cout << "This character says: " << $3 << std::endl;
-                                                              driver.getCurrentLine().dialogue = $3; }
+                                                              std::string dia = $3;
+                                                              driver.getCurrentLine().dialogue = dia.substr(1, dia.length() - 2); }
 	| STRING_LITERAL										{ std::cout << "Message from no character: " << $1 << std::endl;
                                                               driver.pushLine();
-                                                              driver.getCurrentLine().dialogue = $1;
+                                                              std::string dia = $1;
+                                                              driver.getCurrentLine().dialogue = dia.substr(1, dia.length() - 2);
                                                               driver.getCurrentLine().character = "";
                                                               driver.getCurrentLine().expression = ""; }
 	;
@@ -119,7 +121,8 @@ option_list_2:
 character_identifier:
 	STRING LPAREN STRING RPAREN		                		{ std::cout << "Character is " << $1 << " expressing " << $3 << std::endl;
                                                               driver.pushLine();
-                                                              driver.getCurrentLine().character = $1; driver.getCurrentLine().expression = $3; }
+                                                              driver.getCurrentLine().character = $1;
+                                                              driver.getCurrentLine().expression = $3; }
 	| STRING												{ std::cout << "Character is " << $1 << std::endl; 
                                                               driver.pushLine();
                                                               driver.getCurrentLine().character = $1; driver.getCurrentLine().expression = ""; }

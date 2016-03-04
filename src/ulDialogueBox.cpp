@@ -2,7 +2,7 @@
 //#include <panel.h>
 #include <locale.h>
 #include <ncursesw/ncurses.h>
-#include <csignal>
+#include <signal.h>
 
 ulDialogueBox::ulDialogueBox(const std::vector<dialogueLine> &newScript) :
     assetManager("art/art.json"),
@@ -19,10 +19,13 @@ void ulDialogueBox::start()
 {
     preloadAssets(script);
 
-    //signal(SIGWINCH, ulDialogueBox::resize);
+    signal(SIGWINCH, ulDialogueBox::resize);
     setlocale(LC_ALL, "");
     initscr();
+    start_color();
+    init_pair(1, COLOR_RED, COLOR_BLACK);
     cbreak();
+    //nonl();
     noecho();
     keypad(stdscr, TRUE);
     curs_set(0);
@@ -45,10 +48,10 @@ void ulDialogueBox::start()
     getch();
 }*/
 
-void ulDialogueBox::resize(int sig)
+/*static void resize(int sig)
 {
     std::cout<<"resized"<<sig<<std::endl; // TODO: anything whatsoever
-}
+}*/
 
 void ulDialogueBox::drawBorder()
 {
@@ -116,7 +119,7 @@ void ulDialogueBox::regenerateWindows(const dialogueLine &line)
 
     textWidth = winWidth - avWidth - 6;
     textHeight = avHeight/2;
-    textX = avWidth + 2;
+    textX = avWidth + 4;
     textY = (winHeight/2) - (avHeight/2);
 
     if (line.hasOptions)
@@ -173,6 +176,25 @@ void ulDialogueBox::processBranch(const std::vector<dialogueLine> &branch)
     }
 }
 
+void ulDialogueBox::slowPrint(WINDOW *window, std::string text, float speed)
+{
+    wmove(window, 0, 0);
+    auto it = text.begin();
+    int ch = 0;
+    halfdelay(static_cast<int>(1.0f / speed));
+    while (it != text.end())
+    {
+        waddch(window, (*it));
+        ++it;
+        wrefresh(window);
+        if (ch != 'x')
+        {
+            ch = getch();
+        }
+    }
+    cbreak();
+}
+
 CHOICE ulDialogueBox::playLine(const dialogueLine &line)
 {
     //std::cout<<"char: "<<line.character
@@ -191,21 +213,65 @@ CHOICE ulDialogueBox::playLine(const dialogueLine &line)
         wrefresh(wAvatar);
     }
 
-    wmove(wText, 0, 0);
-    auto dia = line.dialogue;
-    auto diaIt = dia.begin();
-    int ch = 0;
-    halfdelay(1);
-    while (diaIt != dia.end() && ch != 'X')
+    mvaddch(textY, textX - 2, '*');
+
+    float speed = assetManager.get(line.character,line.expression).printSpeed;
+    slowPrint(wText, line.dialogue, speed);
+    if (line.hasOptions)
     {
-        waddch(wText, (*diaIt));
-        ++diaIt;
-        wrefresh(wText);
+        slowPrint(wOption1, line.option1, 1.0f);
+        slowPrint(wOption2, line.option2, 1.0f);
+
+        attron(COLOR_PAIR(1));
+        mvaddstr(optionY, option1X - 2, "\u2665");
+        refresh();
+        attroff(COLOR_PAIR(1));
+    }
+
+    int ch = 0;
+    CHOICE rtrn = option1;
+    while (ch != 10 && ch != 'z')
+    {
+        //std::cout<<"enter: "<<KEY_ENTER<<" z: "<<(int)'z'<<" your key: "<<ch<<std::endl;
+
+        if (line.hasOptions)
+        {
+            switch (ch)
+            {
+                case KEY_LEFT:
+                    attron(COLOR_PAIR(1));
+                    mvaddstr(optionY, option1X - 2, "\u2665");
+                    mvaddstr(optionY, option2X - 2, " ");
+                    refresh();
+                    attroff(COLOR_PAIR(1));
+
+                    mvwaddstr(wOption1, 0, 0, line.option1.c_str()); // TODO: wow this is terrible
+                    wrefresh(wOption1);
+
+                    rtrn = option1;
+                    break;
+
+                case KEY_RIGHT:
+                    attron(COLOR_PAIR(1));
+                    mvaddstr(optionY, option2X - 2, "\u2665");
+                    mvaddstr(optionY, option1X - 2, " ");
+                    refresh();
+                    attroff(COLOR_PAIR(1));
+
+                    mvwaddstr(wOption1, 0, 0, line.option1.c_str()); // TODO: wow this is terrible
+                    wrefresh(wOption1);
+
+                    rtrn = option2;
+                    break;
+
+                default:
+                    break;
+            }
+        }
+
         ch = getch();
     }
-    cbreak();
-    getch();
 
-    return option1;
+    return rtrn;
 }
 
