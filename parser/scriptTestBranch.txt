@@ -1,19 +1,19 @@
-Alphys (happy): "ayy lmao"
-Undyne (confused): "ayy?" (Yes/No)
+Alphys (flirty): "ayy lmao"
+Undyne (awkward): "ayy?" (Yes/No)
 Yes:
 (
-    Undyne: "oh ok"
+    Undyne (happyawkward): "oh ok"
 )
 No:
 (
-    Alphys: "did u just" (yesidid/uhsorry)
+    Alphys (anxious8): "did u just" (yesidid/uhsorry)
     yesidid:
     (
-	Undyne: "deal w/ it"
+	Undyne (laughing): "deal w/ it"
     )
     uhsorry:
     (
-	"* Silence."
+	"* Silence. (Also I should really fix the grammar)"
     )
 )
-Alphys: "lmao"
+Alphys (nonchalant1): "lmao"

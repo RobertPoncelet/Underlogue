@@ -78,7 +78,7 @@ void ulDialogueBox::regenerateWindows(const dialogueLine &line)
 
     // Avatar is placed one cell from the left border horizontally, centred vertically
     // We need to find its dimensions
-    int avWidth = 50, avHeight = 0, lineLength = 0;
+    int avWidth = 51, avHeight = 0, lineLength = 0;
     auto lineA = assetManager.get(line.character, "Default");
 
     if (lineA.avatar.empty())

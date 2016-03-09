@@ -3,17 +3,351 @@
     {
         "Default":
         {
-            "sprites": [ "art/alphys/alphys_0_0.txt" ],
+            "sprites": [ "art/alphys/alphys.default.txt" ],
             "speed": 1.0,
             "sound": "sound/voice_alphys.wav"
         },
-        "Hidden":
+        
+        "anxious 1":
+        {
+            "sprites": [ "art/alphys/alphys.anxious01.txt" ],
+            "speed": 1.0,
+            "sound": "sound/voice_alphys.wav"
+        },
+        
+        "anxious 2":
+        {
+            "sprites": [ "art/alphys/alphys.anxious02.txt" ],
+            "speed": 1.0,
+            "sound": "sound/voice_alphys.wav"
+        },
+        
+        "anxious 3":
+        {
+            "sprites": [ "art/alphys/alphys.anxious03.txt" ],
+            "speed": 1.0,
+            "sound": "sound/voice_alphys.wav"
+        },
+        
+        "anxious 4":
+        {
+            "sprites": [ "art/alphys/alphys.anxious04.txt" ],
+            "speed": 1.0,
+            "sound": "sound/voice_alphys.wav"
+        },
+        
+        "anxious 5":
+        {
+            "sprites": [ "art/alphys/alphys.anxious05.txt" ],
+            "speed": 1.0,
+            "sound": "sound/voice_alphys.wav"
+        },
+        
+        "anxious 6":
+        {
+            "sprites": [ "art/alphys/alphys.anxious06.txt" ],
+            "speed": 1.0,
+            "sound": "sound/voice_alphys.wav"
+        },
+        
+        "anxious 7":
+        {
+            "sprites": [ "art/alphys/alphys.anxious07.txt" ],
+            "speed": 1.0,
+            "sound": "sound/voice_alphys.wav"
+        },
+        
+        "anxious8":
+        {
+            "sprites": [ "art/alphys/alphys.anxious08.txt" ],
+            "speed": 1.0,
+            "sound": "sound/voice_alphys.wav"
+        },
+        
+        "blushing":
+        {
+            "sprites": [ "art/alphys/alphys.blushing.txt" ],
+            "speed": 1.0,
+            "sound": "sound/voice_alphys.wav"
+        },
+        
+        "flirty":
+        {
+            "sprites": [ "art/alphys/alphys.flirty.txt" ],
+            "speed": 1.0,
+            "sound": "sound/voice_alphys.wav"
+        },
+        
+        "lovestruck":
+        {
+            "sprites": [ "art/alphys/alphys.lovestruck.txt" ],
+            "speed": 1.0,
+            "sound": "sound/voice_alphys.wav"
+        },
+        
+        "bittersweet 1":
+        {
+            "sprites": [ "art/alphys/alphys.melancholy01.txt" ],
+            "speed": 1.0,
+            "sound": "sound/voice_alphys.wav"
+        },
+        
+        "bittersweet 2":
+        {
+            "sprites": [ "art/alphys/alphys.melancholy02.txt" ],
+            "speed": 1.0,
+            "sound": "sound/voice_alphys.wav"
+        },
+        
+        "bittersweet 3":
+        {
+            "sprites": [ "art/alphys/alphys.melancholy03.txt" ],
+            "speed": 1.0,
+            "sound": "sound/voice_alphys.wav"
+        },
+        
+        "bittersweet 4":
+        {
+            "sprites": [ "art/alphys/alphys.melancholy04.txt" ],
+            "speed": 1.0,
+            "sound": "sound/voice_alphys.wav"
+        },
+        
+        "bittersweet 5":
+        {
+            "sprites": [ "art/alphys/alphys.melancholy05.txt" ],
+            "speed": 1.0,
+            "sound": "sound/voice_alphys.wav"
+        },
+        
+        "nervous":
+        {
+            "sprites": [ "art/alphys/alphys.nervous.txt" ],
+            "speed": 1.0,
+            "sound": "sound/voice_alphys.wav"
+        },
+        
+        "nonchalant1":
+        {
+            "sprites": [ "art/alphys/alphys.nonchalant01.txt" ],
+            "speed": 1.0,
+            "sound": "sound/voice_alphys.wav"
+        },
+        
+        "nonchalant 2":
+        {
+            "sprites": [ "art/alphys/alphys.nonchalant02.txt" ],
+            "speed": 1.0,
+            "sound": "sound/voice_alphys.wav"
+        },
+        
+        "sad 1":
+        {
+            "sprites": [ "art/alphys/alphys.sad01.txt" ],
+            "speed": 1.0,
+            "sound": "sound/voice_alphys.wav"
+        },
+        
+        "sad 2":
+        {
+            "sprites": [ "art/alphys/alphys.sad02.txt" ],
+            "speed": 1.0,
+            "sound": "sound/voice_alphys.wav"
+        },
+        
+        "sad 3":
+        {
+            "sprites": [ "art/alphys/alphys.sad03.txt" ],
+            "speed": 1.0,
+            "sound": "sound/voice_alphys.wav"
+        },
+        
+        "surprised, happy":
+        {
+            "sprites": [ "art/alphys/alphys.surprised_happy.txt" ],
+            "speed": 1.0,
+            "sound": "sound/voice_alphys.wav"
+        },
+        
+        "surprised":
+        {
+            "sprites": [ "art/alphys/alphys.surprised_neutral.txt" ],
+            "speed": 1.0,
+            "sound": "sound/voice_alphys.wav"
+        },
+        
+        "surprised, sad":
+        {
+            "sprites": [ "art/alphys/alphys.surprised_sad.txt" ],
+            "speed": 1.0,
+            "sound": "sound/voice_alphys.wav"
+        },
+        
+        "slightly awkward":
+        {
+            "sprites": [ "art/alphys/alphys.what01.txt" ],
+            "speed": 1.0,
+            "sound": "sound/voice_alphys.wav"
+        },
+        
+        "awkward":
+        {
+            "sprites": [ "art/alphys/alphys.what02.txt" ],
+            "speed": 1.0,
+            "sound": "sound/voice_alphys.wav"
+        },
+        
+        "very awkward":
+        {
+            "sprites": [ "art/alphys/alphys.what03.txt" ],
+            "speed": 1.0,
+            "sound": "sound/voice_alphys.wav"
+        },
+        
+        "worried":
+        {
+            "sprites": [ "art/alphys/alphys.worried.txt" ],
+            "speed": 1.0,
+            "sound": "sound/voice_alphys.wav"
+        },
+        
+        "hidden":
         {
             "sprites": [ null ],
             "speed": 1.0,
             "sound": "sound/voice_alphys.wav"
         }
     },
+    
+    "Undyne":
+    {
+        "Default":
+        {
+            "sprites": [ "art/undyne/undyne.default0.txt", "art/undyne/undyne.default1.txt" ],
+            "speed": 1.0,
+            "sound": "sound/voice_undyne.wav"
+        },
+        
+        "cute":
+        {
+            "sprites": [ "art/undyne/undyne.cute.txt" ],
+            "speed": 1.0,
+            "sound": "sound/voice_undyne.wav"
+        },
+        
+        "determined":
+        {
+            "sprites": [ "art/undyne/undyne.determined.txt" ],
+            "speed": 1.0,
+            "sound": "sound/voice_undyne.wav"
+        },
+        
+        "disgusted":
+        {
+            "sprites": [ "art/undyne/undyne.disgusted0.txt", "art/undyne/undyne.disgusted1.txt" ],
+            "speed": 1.0,
+            "sound": "sound/voice_undyne.wav"
+        },
+        
+        "eyes closed":
+        {
+            "sprites": [ "art/undyne/undyne.eyesclosed.txt" ],
+            "speed": 1.0,
+            "sound": "sound/voice_undyne.wav"
+        },
+        
+        "flirty":
+        {
+            "sprites": [ "art/undyne/undyne.flirty.txt" ],
+            "speed": 1.0,
+            "sound": "sound/voice_undyne.wav"
+        },
+        
+        "happy":
+        {
+            "sprites": [ "art/undyne/undyne.happy0.txt", "art/undyne/undyne.happy1.txt" ],
+            "speed": 1.0,
+            "sound": "sound/voice_undyne.wav"
+        },
+        
+        "happyawkward":
+        {
+            "sprites": [ "art/undyne/undyne.happy_sweat0.txt", "art/undyne/undyne.happy_sweat1.txt" ],
+            "speed": 1.0,
+            "sound": "sound/voice_undyne.wav"
+        },
+        
+        "laughing":
+        {
+            "sprites": [ "art/undyne/undyne.laugh0.txt", "art/undyne/undyne.laugh1.txt" ],
+            "speed": 1.0,
+            "sound": "sound/voice_undyne.wav"
+        },
+        
+        "slightly mad":
+        {
+            "sprites": [ "art/undyne/undyne.mad_subtle.txt" ],
+            "speed": 1.0,
+            "sound": "sound/voice_undyne.wav"
+        },
+        
+        "mad":
+        {
+            "sprites": [ "art/undyne/undyne.mad_moderate0.txt", "art/undyne/undyne.mad_moderate1.txt" ],
+            "speed": 1.0,
+            "sound": "sound/voice_undyne.wav"
+        },
+        
+        "very mad":
+        {
+            "sprites": [ "art/undyne/undyne.mad_intense0.txt", "art/undyne/undyne.mad_intense1.txt" ],
+            "speed": 1.0,
+            "sound": "sound/voice_undyne.wav"
+        },
+        
+        "under her breath":
+        {
+            "sprites": [ "art/undyne/undyne.quiet.txt" ],
+            "speed": 1.0,
+            "sound": "sound/voice_undyne.wav"
+        },
+        
+        "remorseful":
+        {
+            "sprites": [ "art/undyne/undyne.remorseful.txt" ],
+            "speed": 1.0,
+            "sound": "sound/voice_undyne.wav"
+        },
+        
+        "splattered, happy, awkward":
+        {
+            "sprites": [ "art/undyne/undyne.splattered_happy_sweat0.txt", "art/undyne/undyne.splattered_happy_sweat1.txt" ],
+            "speed": 1.0,
+            "sound": "sound/voic - e_undyne.wav"
+        },
+        
+        "splattered, slightly mad":
+        {
+            "sprites": [ "art/undyne/undyne.splattered_mad_subtle.txt" ],
+            "speed": 1.0,
+            "sound": "sound/voice_undyne.wav"
+        },
+        
+        "awkward":
+        {
+            "sprites": [ "art/undyne/undyne.what.txt" ],
+            "speed": 1.0,
+            "sound": "sound/voice_undyne.wav"
+        },
+        
+        "hidden":
+        {   
+            "sprites": [ null ],
+            "speed": 1.0,
+            "sound": "sound/voice_undyne.wav"
+        }
+    },
+    
     "Default":
     {
         "Default":
