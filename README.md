@@ -13,11 +13,10 @@ Library Dependencies
 
 Todo
 ------
-> - Add portrait animation
-> - Add the rest of the characters to the JSON file
-> - Handle terminal window resizing
-> - Better layout of ncurses windows
-> - Prevent words being cut off on new lines
-> - Allow spaces in expression names
-> - Character voice sounds
-> - Reimplement entire project in Python in future?
+1. Add the rest of the characters to the JSON file
+3. Better layout of ncurses windows
+2. Handle terminal window resizing
+5. Allow spaces in expression names
+4. Prevent words being cut off on new lines
+6. Character voice sounds
+7. Reimplement entire project in Python in future?
