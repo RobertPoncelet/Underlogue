@@ -13,6 +13,7 @@ Library Dependencies
 
 Todo
 ------
+1. Fix various bugs with the ncurses display
 1. Add the rest of the characters to the JSON file
 3. Better layout of ncurses windows
 2. Handle terminal window resizing
