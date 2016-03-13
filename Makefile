@@ -18,7 +18,7 @@ CXXFLAGS      = -pipe -g -std=c++11 -Wall -W -fPIE $(DEFINES)
 INCPATH       = -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-clang -I. -Iinclude -Iparser
 LINK          = clang++
 LFLAGS        = -ccc-gcc-name g++
-LIBS          = $(SUBLIBS) parser/ul-parser.o parser/ul-scanner.o -lpanel -lncursesw 
+LIBS          = $(SUBLIBS) parser/ul-parser.o parser/ul-scanner.o -lncursesw 
 AR            = ar cqs
 RANLIB        = 
 QMAKE         = /usr/lib/x86_64-linux-gnu/qt5/bin/qmake

@@ -34,6 +34,6 @@ DISTFILES += \
 
 #QMAKE_LFLAGS += -static
 
-LIBS += parser/ul-parser.o parser/ul-scanner.o -lpanel -lncursesw
+LIBS += parser/ul-parser.o parser/ul-scanner.o -lncursesw
 
 OBJECTS_DIR = ./obj

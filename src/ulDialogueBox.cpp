@@ -130,13 +130,13 @@ void ulDialogueBox::regenerateWindows(const dialogueLine &line)
         option2X = option1X + optionWidth + 3; //make room for the heart and empty cells either side
         optionY = winHeight / 2;
 
-        wText = newwin(textHeight, textWidth, textY, textX);
+        wDialogue = newwin(textHeight, textWidth, textY, textX);
         wOption1 = newwin(optionHeight, optionWidth, optionY, option1X);
         wOption2 = newwin(optionHeight, optionWidth, optionY, option2X);
     }
     else
     {
-        wText = newwin(avHeight, textWidth, (winHeight/2) - (avHeight/2), avWidth + 2);
+        wDialogue = newwin(avHeight, textWidth, (winHeight/2) - (avHeight/2), avWidth + 2);
         wOption1 = newwin(0,0,0,0);
         wOption2 = newwin(0,0,0,0);
     }
@@ -181,7 +181,7 @@ void ulDialogueBox::slowPrint(WINDOW *window, std::string text, float speed)
     wmove(window, 0, 0);
     auto it = text.begin();
     int ch = 0;
-    halfdelay(static_cast<int>(1.0f / speed));
+    halfdelay(static_cast<int>(1.0 / speed));
     while (it != text.end())
     {
         waddch(window, (*it));
@@ -192,6 +192,60 @@ void ulDialogueBox::slowPrint(WINDOW *window, std::string text, float speed)
             ch = getch();
         }
     }
+    cbreak();
+}
+
+void ulDialogueBox::slowPrintDialogue(const dialogueLine &line)
+{
+    lineAsset lineA = assetManager.get(line.character, line.expression);
+
+    int delay = static_cast<int>(1.0 / lineA.printSpeed);
+    auto it = line.dialogue.begin();
+    int ch = 0;
+    int count = 0;
+    auto currentFrame = lineA.avatar.begin();
+    int x, y;
+
+    wmove(wDialogue, 0, 0);
+    halfdelay(delay);
+
+    while (it != line.dialogue.end())
+    {
+        waddch(wDialogue, (*it));
+
+        if (lineA.avatar.size() >= 2 && count % (3*delay) == 0)
+        {
+            getyx(wDialogue, y, x);
+
+            wclear(wAvatar);
+            mvwaddstr(wAvatar, 0, 0, (*currentFrame).c_str());
+            wrefresh(wAvatar);
+
+            if (++currentFrame == lineA.avatar.end())
+            {
+                currentFrame = lineA.avatar.begin();
+            }
+
+            wmove(wDialogue, y, x);
+        }
+
+        ++it;
+        ++count;
+        wrefresh(wDialogue);
+
+        if (ch != 'x')
+        {
+            ch = getch();
+        }
+    }
+
+    /*if (!lineA.avatar.empty())
+    {
+        wclear(wAvatar);
+        mvwaddstr(wAvatar, 0, 0, lineA.avatar[0].c_str());
+        wrefresh(wAvatar);
+    }*/
+
     cbreak();
 }
 
@@ -209,14 +263,17 @@ CHOICE ulDialogueBox::playLine(const dialogueLine &line)
     auto avi = assetManager.get(line.character, line.expression).avatar;
     if (!avi.empty())
     {
+        wclear(wAvatar);
         mvwaddstr(wAvatar, 0, 0, avi[0].c_str());
         wrefresh(wAvatar);
     }
 
     mvaddch(textY, textX - 2, '*');
 
-    float speed = assetManager.get(line.character,line.expression).printSpeed;
-    slowPrint(wText, line.dialogue, speed);
+    //float speed = assetManager.get(line.character,line.expression).printSpeed;
+
+    slowPrintDialogue(line);
+
     if (line.hasOptions)
     {
         slowPrint(wOption1, line.option1, 1.0f);
@@ -275,3 +332,8 @@ CHOICE ulDialogueBox::playLine(const dialogueLine &line)
     return rtrn;
 }
 
+void ulDialogueBox::resize(int sig)
+{
+    // TODO: more stuff
+    clear();
+}
