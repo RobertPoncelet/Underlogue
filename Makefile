@@ -49,12 +49,14 @@ SOURCES       = src/main.cpp \
 		src/ulAssetManager.cpp \
 		src/ulScriptReader.cpp \
 		parser/ul-driver.cc \
-		src/ulDialogueBox.cpp 
+		src/ulDialogueBox.cpp \
+		src/ulDBoxElement.cpp 
 OBJECTS       = obj/main.o \
 		obj/ulAssetManager.o \
 		obj/ulScriptReader.o \
 		obj/ul-driver.o \
-		obj/ulDialogueBox.o
+		obj/ulDialogueBox.o \
+		obj/ulDBoxElement.o
 DIST          = parser/parser.mk \
 		parser/ul-scanner.ll \
 		parser/ul-parser.yy \
@@ -317,6 +319,9 @@ obj/ulDialogueBox.o: src/ulDialogueBox.cpp include/ulDialogueBox.h \
 		parser/dialogue.h \
 		include/ulAssetManager.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o obj/ulDialogueBox.o src/ulDialogueBox.cpp
+
+obj/ulDBoxElement.o: src/ulDBoxElement.cpp include/ulDBoxElement.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o obj/ulDBoxElement.o src/ulDBoxElement.cpp
 
 ####### Install
 

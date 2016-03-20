@@ -6,13 +6,18 @@
 
 ulDialogueBox::ulDialogueBox(const std::vector<dialogueLine> &newScript) :
     assetManager("art/art.json"),
-    script(newScript)
+    script(newScript),
+    wDialogue()
 {
 }
 
 ulDialogueBox::~ulDialogueBox()
 {
-    endwin();			/* End curses mode		  */
+    delwin(wAvatar);
+    //delwin(wDialogue);
+    delwin(wOption1);
+    delwin(wOption2);
+    endwin();
 }
 
 void ulDialogueBox::start()
@@ -130,13 +135,18 @@ void ulDialogueBox::regenerateWindows(const dialogueLine &line)
         option2X = option1X + optionWidth + 3; //make room for the heart and empty cells either side
         optionY = winHeight / 2;
 
-        wDialogue = newwin(textHeight, textWidth, textY, textX);
+        //wDialogue = newwin(textHeight, textWidth, textY, textX);
+        wDialogue.setBoxExtent(2, winHeight - 2, avWidth + 2, winWidth - 2);
+        wDialogue.setContent(line.dialogue);
+        wDialogue.autoSizeByContent();
         wOption1 = newwin(optionHeight, optionWidth, optionY, option1X);
         wOption2 = newwin(optionHeight, optionWidth, optionY, option2X);
     }
     else
     {
-        wDialogue = newwin(avHeight, textWidth, (winHeight/2) - (avHeight/2), avWidth + 2);
+        //wDialogue = newwin(avHeight, textWidth, (winHeight/2) - (avHeight/2), avWidth + 2);
+        wDialogue.setBoxExtent(2, winHeight - 2, avWidth + 2, winWidth - 2);
+        wDialogue.autoSizeByContent();
         wOption1 = newwin(0,0,0,0);
         wOption2 = newwin(0,0,0,0);
     }
@@ -164,7 +174,7 @@ void ulDialogueBox::processBranch(const std::vector<dialogueLine> &branch)
 
         if (line.hasOptions)
         {
-            if (choice == option1)
+            if (choice == OPTION_1)
             {
                 processBranch(line.branch1);
             }
@@ -206,16 +216,20 @@ void ulDialogueBox::slowPrintDialogue(const dialogueLine &line)
     auto currentFrame = lineA.avatar.begin();
     int x, y;
 
-    wmove(wDialogue, 0, 0);
+    //wmove(wDialogue, 0, 0);
     halfdelay(delay);
 
-    while (it != line.dialogue.end())
+    while (getch() != 'x' && wDialogue.step())
     {
-        waddch(wDialogue, (*it));
+    }
+
+    /*while (it != line.dialogue.end())
+    {
+        //waddch(wDialogue, (*it));
 
         if (lineA.avatar.size() >= 2 && count % (3*delay) == 0)
         {
-            getyx(wDialogue, y, x);
+            //getyx(wDialogue, y, x);
 
             wclear(wAvatar);
             mvwaddstr(wAvatar, 0, 0, (*currentFrame).c_str());
@@ -226,18 +240,18 @@ void ulDialogueBox::slowPrintDialogue(const dialogueLine &line)
                 currentFrame = lineA.avatar.begin();
             }
 
-            wmove(wDialogue, y, x);
+            //wmove(wDialogue, y, x);
         }
 
         ++it;
         ++count;
-        wrefresh(wDialogue);
+        //wrefresh(wDialogue);
 
         if (ch != 'x')
         {
             ch = getch();
         }
-    }
+    }*/
 
     /*if (!lineA.avatar.empty())
     {
@@ -286,7 +300,7 @@ CHOICE ulDialogueBox::playLine(const dialogueLine &line)
     }
 
     int ch = 0;
-    CHOICE rtrn = option1;
+    CHOICE rtrn = OPTION_1;
     while (ch != 10 && ch != 'z')
     {
         //std::cout<<"enter: "<<KEY_ENTER<<" z: "<<(int)'z'<<" your key: "<<ch<<std::endl;
@@ -305,7 +319,7 @@ CHOICE ulDialogueBox::playLine(const dialogueLine &line)
                     mvwaddstr(wOption1, 0, 0, line.option1.c_str()); // TODO: wow this is terrible
                     wrefresh(wOption1);
 
-                    rtrn = option1;
+                    rtrn = OPTION_1;
                     break;
 
                 case KEY_RIGHT:
@@ -318,7 +332,7 @@ CHOICE ulDialogueBox::playLine(const dialogueLine &line)
                     mvwaddstr(wOption1, 0, 0, line.option1.c_str()); // TODO: wow this is terrible
                     wrefresh(wOption1);
 
-                    rtrn = option2;
+                    rtrn = OPTION_2;
                     break;
 
                 default:

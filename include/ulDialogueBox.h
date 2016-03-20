@@ -7,13 +7,14 @@
 #include <iostream>
 #include "dialogue.h"
 #include "ulAssetManager.h"
+#include "ulDBoxElement.h"
 //#include "ulDialogueOption.h"
 //#include "ulLabel.h"
 
 enum CHOICE
 {
-    option1,
-    option2
+    OPTION_1,
+    OPTION_2
 };
 
 class ulDialogueBox
@@ -40,7 +41,8 @@ private:
 
     int textWidth, textHeight, textX, textY;
     int optionWidth, optionHeight, option1X, option2X, optionY;
-    WINDOW *wAvatar, *wDialogue, *wOption1, *wOption2;
+    WINDOW *wAvatar, /**wDialogue,*/ *wOption1, *wOption2;
+    ulDBoxElement wDialogue;
 
 };
 

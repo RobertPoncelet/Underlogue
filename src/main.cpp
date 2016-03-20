@@ -37,8 +37,8 @@ int main(int argc, char* argv[])
             return EXIT_FAILURE;
         }
     }
-      
-    //driver.printScript(&driver.script);
+
+    std::cout<<"fuckofffffffff";
 
     ulDialogueBox diaBox(driver.script);
     diaBox.start();
