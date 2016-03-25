@@ -138,7 +138,7 @@ void ulDialogueBox::regenerateWindows(const dialogueLine &line)
         //wDialogue = newwin(textHeight, textWidth, textY, textX);
         wDialogue.setBoxExtent(2, winHeight - 2, avWidth + 2, winWidth - 2);
         wDialogue.setContent(line.dialogue);
-        wDialogue.autoSizeByContent();
+        //wDialogue.autoSizeByContent();
         wOption1 = newwin(optionHeight, optionWidth, optionY, option1X);
         wOption2 = newwin(optionHeight, optionWidth, optionY, option2X);
     }
@@ -146,7 +146,8 @@ void ulDialogueBox::regenerateWindows(const dialogueLine &line)
     {
         //wDialogue = newwin(avHeight, textWidth, (winHeight/2) - (avHeight/2), avWidth + 2);
         wDialogue.setBoxExtent(2, winHeight - 2, avWidth + 2, winWidth - 2);
-        wDialogue.autoSizeByContent();
+        wDialogue.setContent(line.dialogue);
+        //wDialogue.autoSizeByContent();
         wOption1 = newwin(0,0,0,0);
         wOption2 = newwin(0,0,0,0);
     }

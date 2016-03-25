@@ -103,12 +103,17 @@ void ulDBoxElement::skip()
 
 void ulDBoxElement::reset()
 {
+    wclear(window);
     currentStep = 0;
     refresh();
 }
 
-void ulDBoxElement::refresh()
+void ulDBoxElement::refresh(bool clear)
 {
+    if (clear)
+    {
+        wclear(window);
+    }
     if (currentStep >= 0 && currentStep < (int)content.length())
     {
         mvwaddstr(window, 0, 0, content.substr(0, currentStep).c_str());
@@ -131,7 +136,7 @@ void ulDBoxElement::setContent(std::string inContent, bool shouldReset)
 
 std::string ulDBoxElement::lineWrap(std::string inString, int lineWidth) const
 {
-    // The following code is adapted from:
+    // This function is adapted from:
     // http://www.cprogramming.com/snippets/source-code/word-wrap-in-c
 
     /*
@@ -141,35 +146,42 @@ std::string ulDBoxElement::lineWrap(std::string inString, int lineWidth) const
        backtrack along the string until white space is found.
      */
 
-    int i = 0;
+    // TODO: fix
+    /*int i = 0;
     int k, counter;
-    char buffer[2 * inString.length()];
+    std::string::iterator iterator;
+    //char buffer[2 * inString.length()];
+    std::string outString("");
 
     while(i < (int)inString.length() )
     {
         // copy string until the end of the line is reached
-        for ( counter = 1; counter <= lineWidth; counter++ )
+        for ( iterator = inString.begin(); iterator <= lineWidth; ++iterator )
         {
             // check if end of string reached
             if ( i == (int)inString.length() )
             {
-                buffer[ i ] = 0;
-                return std::string(buffer);
+                //buffer[ i ] = 0;
+                //return std::string(buffer);
+                return outString;
             }
-            buffer[ i ] = inString[ i ];
+            //buffer[ i ] = inString[ i ];
+            outString.append(inString[i]);
             // check for newlines embedded in the original input
             // and reset the index
-            if ( buffer[ i ] == '\n' )
+            //if ( buffer[ i ] == '\n' )
+            if ( inString[i] == '\n' )
             {
-                counter = 1;
+                //counter = 1;
+                iterator = inString.begin();
             }
-            i++;
+            ++i;
         }
         // check for whitespace
         if ( isspace( inString[ i ] ) )
         {
-            buffer[i] = '\n';
-            i++;
+            outString.append('\n');
+            ++i;
         }
         else
         {
@@ -185,9 +197,9 @@ std::string ulDBoxElement::lineWrap(std::string inString, int lineWidth) const
                 }
             }
         }
-    }
+    }*/
 
-    return std::string(buffer);
+    return std::string("test");
 }
 
 int ulDBoxElement::contentHeight(std::string inString) const
@@ -197,7 +209,7 @@ int ulDBoxElement::contentHeight(std::string inString) const
 
 int ulDBoxElement::contentWidth(std::string inString) const
 {
-    // The following code is adapted from:
+    // This function is adapted from:
     // http://stackoverflow.com/questions/14265581/parse-split-a-string-in-c-using-string-delimiter-standard-c
 
     size_t pos = 0;

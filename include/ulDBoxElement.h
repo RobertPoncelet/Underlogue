@@ -33,7 +33,7 @@ public:
     virtual bool step(); // Returns false if finished
     virtual void skip();
     virtual void reset();
-    void refresh();
+    void refresh(bool clear = false);
 
     // Content
     void setContent(std::string inContent, bool shouldReset = true);
