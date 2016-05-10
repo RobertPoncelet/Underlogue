@@ -1,5 +1,7 @@
 #include "include/ulDBoxElement.h"
 
+#include <iostream>
+
 /*
 #define IN_HEIGHT (bottom - top)
 #define IN_WIDTH (right - left)
@@ -10,7 +12,8 @@
 ulDBoxElement::ulDBoxElement() :
     content(std::string("")), currentStep(0)
 {
-    //window = newwin(IN_HEIGHT, IN_WIDTH, top, left);
+    //setBoxExtent(top, bottom, left, right);
+    window = newwin(0, 0, 0, 0);
     //setBoxExtent(top, bottom, left, right);
 }
 
@@ -30,12 +33,13 @@ void ulDBoxElement::autoSizeByContent(bool heightOnly, bool aboutCentre)
 {
     if (heightOnly)
     {
-        content = lineWrap(content, getRight() - getLeft());
+        content = lineWrap(content, getWidth());
         int height = contentHeight(content);
+        std::cout<<"height: "<<height<<std::endl;
 
         if (aboutCentre)
         {
-            int halfHeight = height / 2;
+            int halfHeight = std::max(1, height / 2);
             setBoxExtent(getCentreY() - halfHeight,
                          getCentreY() + (height - halfHeight), // Do this in case of uneven splits
                          getLeft(),
@@ -156,7 +160,7 @@ std::string ulDBoxElement::lineWrap(std::string inString, int lineWidth) const
     while(i < (int)inString.length() )
     {
         // copy string until the end of the line is reached
-        for ( iterator = inString.begin(); iterator <= lineWidth; ++iterator )
+        for ( int iterator = 0; iterator <= lineWidth; ++iterator )
         {
             // check if end of string reached
             if ( i == (int)inString.length() )
@@ -166,21 +170,21 @@ std::string ulDBoxElement::lineWrap(std::string inString, int lineWidth) const
                 return outString;
             }
             //buffer[ i ] = inString[ i ];
-            outString.append(inString[i]);
+            outString += inString[i];
             // check for newlines embedded in the original input
             // and reset the index
             //if ( buffer[ i ] == '\n' )
             if ( inString[i] == '\n' )
             {
                 //counter = 1;
-                iterator = inString.begin();
+                iterator = 0;
             }
             ++i;
         }
         // check for whitespace
-        if ( isspace( inString[ i ] ) )
+        if (inString[ i ] == ' ' || inString[ i ] == '\t' || inString[ i ] == '\n')
         {
-            outString.append('\n');
+            outString += '\n';
             ++i;
         }
         else
@@ -188,23 +192,55 @@ std::string ulDBoxElement::lineWrap(std::string inString, int lineWidth) const
             // check for nearest whitespace back in string
             for ( k = i; k > 0; k--)
             {
-                if ( isspace( inString[ k ] ) )
+                if (inString[ k ] == ' ' || inString[ k ] == '\t' || inString[ k ] == '\n')
                 {
-                    buffer[ k ] = '\n';
+                    //buffer[ k ] = '\n';
                     // set string index back to character after this one
                     i = k + 1;
                     break;
                 }
             }
         }
-    }*/
+    }
 
-    return std::string("test");
+    return outString;*/
+
+    // Adapted from http://alexrodgers.co.uk/2012/08/09/c-word-wrap-for-console-output-tutorial/
+
+    for (unsigned int i = 1; i <= inString.length() ; i++)
+    {
+        if ((i % lineWidth) == 0)
+        {
+            int spaceCount = 0;
+            if (inString[(i-1)] != ' ')
+            {
+                for (int j = (i-1); j > -1 ; j--)
+                {
+                    if (inString[j] == ' ')
+                    {
+                        inString.insert(j, spaceCount, ' ');
+                        break;
+                    }
+                    else spaceCount++;
+                }
+            }
+        }
+    }
+
+    return inString;
 }
 
 int ulDBoxElement::contentHeight(std::string inString) const
 {
-    return (int)inString.find('\n') + 1;
+    int count = 1;
+    for (char current : inString)
+    {
+        if (current == '\n')
+        {
+            ++count;
+        }
+    }
+    return count;
 }
 
 int ulDBoxElement::contentWidth(std::string inString) const
@@ -226,4 +262,11 @@ int ulDBoxElement::contentWidth(std::string inString) const
     return maxSize;
 }
 
-
+int ulDBoxElement::getLeft() const     { return window ? window->_begx : -1; }
+int ulDBoxElement::getRight() const    { return window ? window->_maxx : -1; }
+int ulDBoxElement::getTop() const      { return window ? window->_begy : -1; }
+int ulDBoxElement::getBottom() const   { return window ? window->_maxy : -1; }
+int ulDBoxElement::getCentreX() const  { return window ? (window->_maxx + window->_begx) / 2 : -1; }
+int ulDBoxElement::getCentreY() const  { return window ? (window->_maxy + window->_begy) / 2 : -1; }
+int ulDBoxElement::getWidth() const    { return window ? (window->_maxx - window->_begx) / 2 : -1; }
+int ulDBoxElement::getHeight() const   { return window ? (window->_maxy - window->_begy) / 2 : -1; }

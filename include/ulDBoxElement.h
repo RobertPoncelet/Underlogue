@@ -20,14 +20,14 @@ public:
     void setBottom(int bottom)      { setBoxExtent(getTop(), bottom, getLeft(), getRight()); }
     void setCentre(int y, int x);
 
-    int getLeft() const     { return window->_begx; }
-    int getRight() const    { return window->_maxx; }
-    int getTop() const      { return window->_begy; }
-    int getBottom() const   { return window->_maxy; }
-    int getCentreX() const  { return (window->_maxx + window->_begx) / 2; }
-    int getCentreY() const  { return (window->_maxy + window->_begy) / 2; }
-    int getWidth() const    { return (window->_maxx - window->_begx) / 2; }
-    int getHeight() const   { return (window->_maxy - window->_begy) / 2; }
+    int getLeft() const     ;//{ return window ? window->_begx : -1; }
+    int getRight() const    ;//{ return window ? window->_maxx : -1; }
+    int getTop() const      ;//{ return window ? window->_begy : -1; }
+    int getBottom() const   ;//{ return window ? window->_maxy : -1; }
+    int getCentreX() const  ;//{ return window ? (window->_maxx + window->_begx) / 2 : -1; }
+    int getCentreY() const  ;//{ return window ? (window->_maxy + window->_begy) / 2 : -1; }
+    int getWidth() const    ;//{ return window ? (window->_maxx - window->_begx) / 2 : -1; }
+    int getHeight() const   ;//{ return window ? (window->_maxy - window->_begy) / 2 : -1; }
 
     // Interactivity
     virtual bool step(); // Returns false if finished

@@ -35,6 +35,8 @@ void ulDialogueBox::start()
     keypad(stdscr, TRUE);
     curs_set(0);
 
+    wDialogue.setBoxExtent(0, 1, 0, 1);
+
     processBranch(script);
 }
 
@@ -78,6 +80,8 @@ void ulDialogueBox::drawBorder()
 
 void ulDialogueBox::regenerateWindows(const dialogueLine &line)
 {
+    clear();
+
     int winHeight, winWidth;
     getmaxyx(stdscr, winHeight, winWidth);
 
@@ -116,6 +120,7 @@ void ulDialogueBox::regenerateWindows(const dialogueLine &line)
 
     //std::cout<<"width: "<<avWidth<<" height: "<<avHeight<<std::endl;
 
+    delwin(wAvatar);
     wAvatar = newwin(avHeight, avWidth, (winHeight/2) - (avHeight/2), 2);
 
     // Horizontally: avatar ends, then an empty cell, then the * starting the dialogue,
@@ -138,7 +143,10 @@ void ulDialogueBox::regenerateWindows(const dialogueLine &line)
         //wDialogue = newwin(textHeight, textWidth, textY, textX);
         wDialogue.setBoxExtent(2, winHeight - 2, avWidth + 2, winWidth - 2);
         wDialogue.setContent(line.dialogue);
+        wDialogue.refresh(true);
         //wDialogue.autoSizeByContent();
+        delwin(wOption1);
+        delwin(wOption2);
         wOption1 = newwin(optionHeight, optionWidth, optionY, option1X);
         wOption2 = newwin(optionHeight, optionWidth, optionY, option2X);
     }
@@ -147,7 +155,10 @@ void ulDialogueBox::regenerateWindows(const dialogueLine &line)
         //wDialogue = newwin(avHeight, textWidth, (winHeight/2) - (avHeight/2), avWidth + 2);
         wDialogue.setBoxExtent(2, winHeight - 2, avWidth + 2, winWidth - 2);
         wDialogue.setContent(line.dialogue);
-        //wDialogue.autoSizeByContent();
+        wDialogue.autoSizeByContent(true, false);
+        wDialogue.refresh(true);
+        delwin(wOption1);
+        delwin(wOption2);
         wOption1 = newwin(0,0,0,0);
         wOption2 = newwin(0,0,0,0);
     }
@@ -283,7 +294,7 @@ CHOICE ulDialogueBox::playLine(const dialogueLine &line)
         wrefresh(wAvatar);
     }
 
-    mvaddch(textY, textX - 2, '*');
+    mvaddch(wDialogue.getTop(), wDialogue.getLeft() - 2, '*');
 
     //float speed = assetManager.get(line.character,line.expression).printSpeed;
 
