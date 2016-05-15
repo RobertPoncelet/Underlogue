@@ -126,12 +126,14 @@ void ulDBoxElement::refresh(bool clear)
     {
         mvwaddstr(window, 0, 0, content.c_str());
     }
+
     wrefresh(window);
 }
 
 void ulDBoxElement::setContent(std::string inContent, bool shouldReset)
 {
     content = inContent;
+    content = lineWrap(content, getWidth());
     if (shouldReset)
     {
         reset();
@@ -218,10 +220,13 @@ std::string ulDBoxElement::lineWrap(std::string inString, int lineWidth) const
                 {
                     if (inString[j] == ' ')
                     {
-                        inString.insert(j, spaceCount, ' ');
+                        inString.insert(j, spaceCount, '\n');
                         break;
                     }
-                    else spaceCount++;
+                    else
+                    {
+                        spaceCount++;
+                    }
                 }
             }
         }

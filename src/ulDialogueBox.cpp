@@ -29,11 +29,11 @@ void ulDialogueBox::start()
     initscr();
     start_color();
     init_pair(1, COLOR_RED, COLOR_BLACK);
-    cbreak();
+    //cbreak();
     //nonl();
-    noecho();
-    keypad(stdscr, TRUE);
-    curs_set(0);
+    //noecho();
+    //keypad(stdscr, TRUE);
+    //curs_set(0);
 
     wDialogue.setBoxExtent(0, 1, 0, 1);
 
@@ -155,7 +155,7 @@ void ulDialogueBox::regenerateWindows(const dialogueLine &line)
         //wDialogue = newwin(avHeight, textWidth, (winHeight/2) - (avHeight/2), avWidth + 2);
         wDialogue.setBoxExtent(2, winHeight - 2, avWidth + 2, winWidth - 2);
         wDialogue.setContent(line.dialogue);
-        wDialogue.autoSizeByContent(true, false);
+        //wDialogue.autoSizeByContent(true, false);
         wDialogue.refresh(true);
         delwin(wOption1);
         delwin(wOption2);
