@@ -29,11 +29,11 @@ void ulDialogueBox::start()
     initscr();
     start_color();
     init_pair(1, COLOR_RED, COLOR_BLACK);
-    //cbreak();
-    //nonl();
-    //noecho();
-    //keypad(stdscr, TRUE);
-    //curs_set(0);
+    cbreak();
+    nonl();
+    noecho();
+    keypad(stdscr, TRUE);
+    curs_set(0);
 
     wDialogue.setBoxExtent(0, 1, 0, 1);
 
@@ -362,4 +362,15 @@ void ulDialogueBox::resize(int sig)
 {
     // TODO: more stuff
     clear();
+}
+
+void ulDialogueBox::printHelp()
+{
+    preloadAssets(script);
+
+    std::cout<<"All available expressions:"<<std::endl;
+    for (auto expression : assetManager.getAllExpressions())
+    {
+        std::cout<<expression.first<<": "<<expression.second<<std::endl;
+    }
 }

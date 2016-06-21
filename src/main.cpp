@@ -19,7 +19,14 @@ int main(int argc, char* argv[])
   
     for (int i = 1; i < argc; ++i)
     {
-        if (argv[i] == std::string("-p"))
+        if (argv[i] == std::string("-h") || argv[i] == std::string("-help"))
+        {
+            std::vector<dialogueLine> tmp;
+            ulDialogueBox diaBox(tmp);
+            diaBox.printHelp();
+            return EXIT_SUCCESS;
+        }
+        else if (argv[i] == std::string("-p"))
         {
             driver.trace_parsing = true;
         }
@@ -37,8 +44,6 @@ int main(int argc, char* argv[])
             return EXIT_FAILURE;
         }
     }
-
-    std::cout<<"fuckofffffffff";
 
     ulDialogueBox diaBox(driver.script);
     diaBox.start();

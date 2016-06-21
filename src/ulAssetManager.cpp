@@ -141,3 +141,22 @@ lineAsset ulAssetManager::get(std::string character, std::string expression)
     }
     return assets[key];
 }
+
+std::vector< std::pair<std::string, std::string> > ulAssetManager::getAllExpressions()
+{
+    /*for(auto it = doc.ConstMemberIterator; it != doc.End(); it++)
+    {
+       if (it->IsObject())
+       {
+           std::cout<<it
+       }
+    }*/
+
+    std::vector< std::pair<std::string, std::string> > ret;
+    std::cout<<assets.size()<<" available expressions\n";
+    for (auto asset : assets)
+    {
+        ret.push_back(asset.first);
+    }
+    return ret;
+}

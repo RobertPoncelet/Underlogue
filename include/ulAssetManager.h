@@ -21,6 +21,7 @@ public:
 	
     bool preload(std::string character, std::string expression);
     lineAsset get(std::string character, std::string expression);
+    std::vector< std::pair<std::string, std::string> > getAllExpressions();
 	
 private:
 	std::map<std::pair<std::string, std::string>, lineAsset> assets;

@@ -8,49 +8,49 @@
             "sound": "sound/voice_alphys.wav"
         },
         
-        "anxious 1":
+        "anxious1":
         {
             "sprites": [ "art/alphys/alphys.anxious01.txt" ],
             "speed": 1.0,
             "sound": "sound/voice_alphys.wav"
         },
         
-        "anxious 2":
+        "anxious2":
         {
             "sprites": [ "art/alphys/alphys.anxious02.txt" ],
             "speed": 1.0,
             "sound": "sound/voice_alphys.wav"
         },
         
-        "anxious 3":
+        "anxious3":
         {
             "sprites": [ "art/alphys/alphys.anxious03.txt" ],
             "speed": 1.0,
             "sound": "sound/voice_alphys.wav"
         },
         
-        "anxious 4":
+        "anxious4":
         {
             "sprites": [ "art/alphys/alphys.anxious04.txt" ],
             "speed": 1.0,
             "sound": "sound/voice_alphys.wav"
         },
         
-        "anxious 5":
+        "anxious5":
         {
             "sprites": [ "art/alphys/alphys.anxious05.txt" ],
             "speed": 1.0,
             "sound": "sound/voice_alphys.wav"
         },
         
-        "anxious 6":
+        "anxious6":
         {
             "sprites": [ "art/alphys/alphys.anxious06.txt" ],
             "speed": 1.0,
             "sound": "sound/voice_alphys.wav"
         },
         
-        "anxious 7":
+        "anxious7":
         {
             "sprites": [ "art/alphys/alphys.anxious07.txt" ],
             "speed": 1.0,

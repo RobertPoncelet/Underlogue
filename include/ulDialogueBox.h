@@ -25,6 +25,7 @@ public:
     void show();
     void start();
     void drawBorder();
+    void printHelp();
 
 private:
     static void resize(int sig);

@@ -1,6 +1,7 @@
 #include "include/ulDBoxElement.h"
 
 #include <iostream>
+#include <assert.h>
 
 /*
 #define IN_HEIGHT (bottom - top)
@@ -26,7 +27,7 @@ void ulDBoxElement::setBoxExtent(int top, int bottom, int left, int right)
 {
     delwin(window);
     window = newwin(bottom-top, right-left, top, left);
-    refresh();
+    wrefresh(window);
 }
 
 void ulDBoxElement::autoSizeByContent(bool heightOnly, bool aboutCentre)
@@ -35,15 +36,16 @@ void ulDBoxElement::autoSizeByContent(bool heightOnly, bool aboutCentre)
     {
         content = lineWrap(content, getWidth());
         int height = contentHeight(content);
-        std::cout<<"height: "<<height<<std::endl;
+        assert(height > 0 && content.length() > 0);
 
         if (aboutCentre)
         {
             int halfHeight = std::max(1, height / 2);
-            setBoxExtent(getCentreY() - halfHeight,
-                         getCentreY() + (height - halfHeight), // Do this in case of uneven splits
+            setBoxExtent(getCentreY() + (height - halfHeight),
+                         getCentreY() - halfHeight, // Do this in case of uneven splits
                          getLeft(),
                          getRight());
+            //assert(getHeight() != -1 && getWidth() != -1);
         }
         else
         {
@@ -51,6 +53,7 @@ void ulDBoxElement::autoSizeByContent(bool heightOnly, bool aboutCentre)
                          getTop() + height,
                          getLeft(),
                          getRight());
+            //assert(getHeight() != -1 && getWidth() != -1);
         }
     }
     else
@@ -75,6 +78,8 @@ void ulDBoxElement::autoSizeByContent(bool heightOnly, bool aboutCentre)
                          getLeft() + width);
         }
     }
+
+    refresh();
 }
 
 void ulDBoxElement::setCentre(int y, int x)
@@ -132,8 +137,8 @@ void ulDBoxElement::refresh(bool clear)
 
 void ulDBoxElement::setContent(std::string inContent, bool shouldReset)
 {
-    content = inContent;
-    content = lineWrap(content, getWidth());
+    //content = inContent;
+    content = lineWrap(inContent, getWidth());
     if (shouldReset)
     {
         reset();
@@ -220,7 +225,8 @@ std::string ulDBoxElement::lineWrap(std::string inString, int lineWidth) const
                 {
                     if (inString[j] == ' ')
                     {
-                        inString.insert(j, spaceCount, '\n');
+                        //inString.insert(j, spaceCount, '\n');
+                        inString.insert(j, 1, '\n');
                         break;
                     }
                     else
@@ -230,6 +236,11 @@ std::string ulDBoxElement::lineWrap(std::string inString, int lineWidth) const
                 }
             }
         }
+    }
+
+    if (inString == "")
+    {
+        inString = std::string("FUCK");
     }
 
     return inString;
