@@ -35,7 +35,7 @@ void ulDialogueBox::start()
     keypad(stdscr, TRUE);
     curs_set(0);
 
-    wDialogue.setBoxExtent(0, 1, 0, 1);
+    wDialogue.setBoxExtent(1, 3, 1, 3);
 
     processBranch(script);
 }
@@ -143,8 +143,8 @@ void ulDialogueBox::regenerateWindows(const dialogueLine &line)
         //wDialogue = newwin(textHeight, textWidth, textY, textX);
         wDialogue.setBoxExtent(2, winHeight - 2, avWidth + 2, winWidth - 2);
         wDialogue.setContent(line.dialogue);
-        wDialogue.refresh(true);
-        //wDialogue.autoSizeByContent();
+        //wDialogue.refresh(true);
+        wDialogue.autoSizeByContent(true);
         delwin(wOption1);
         delwin(wOption2);
         wOption1 = newwin(optionHeight, optionWidth, optionY, option1X);
@@ -155,8 +155,8 @@ void ulDialogueBox::regenerateWindows(const dialogueLine &line)
         //wDialogue = newwin(avHeight, textWidth, (winHeight/2) - (avHeight/2), avWidth + 2);
         wDialogue.setBoxExtent(2, winHeight - 2, avWidth + 2, winWidth - 2);
         wDialogue.setContent(line.dialogue);
-        //wDialogue.autoSizeByContent(true, false);
-        wDialogue.refresh(true);
+        wDialogue.autoSizeByContent(true, false);
+        //wDialogue.refresh(true);
         delwin(wOption1);
         delwin(wOption2);
         wOption1 = newwin(0,0,0,0);
