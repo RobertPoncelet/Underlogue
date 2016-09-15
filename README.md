@@ -3,6 +3,7 @@
 Overview
 ------
 Underlogue uses the ncurses library to produce Undertale-style dialogue boxes in the bash terminal. Features (will) include animated character portraits, creation of dialogue in a bespoke language with a movie script-like syntax, and the ability to let the player choose between two options at any point for different branches of dialogue.
+
 ![preview](preview.png)
 
 Here's an example of a "script":
