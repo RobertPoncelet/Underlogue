@@ -26,6 +26,7 @@ public:
 private:
 	std::map<std::pair<std::string, std::string>, lineAsset> assets;
     rapidjson::Document doc;
+    std::string progDir;
 };
 
 #endif

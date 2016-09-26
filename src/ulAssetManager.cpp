@@ -4,6 +4,10 @@
 #include <streambuf>
 #include <cassert>
 
+// For amending file path
+#include <sys/types.h>
+#include <unistd.h>
+
 #include "rapidjson/document.h"
 #include "rapidjson/writer.h"
 #include "rapidjson/stringbuffer.h"
@@ -11,10 +15,24 @@
 
 ulAssetManager::ulAssetManager(std::string artFilePath)
 {
-    std::ifstream artFile(artFilePath);
+    // Should probably find a better way of doing this bit
+    int len = 256;
+    char pBuf[len];
+    char szTmp[32];
+    sprintf(szTmp, "/proc/%d/exe", getpid());
+    int bytes = std::min((int)readlink(szTmp, pBuf, len), len - 1);
+    if(bytes >= 0)
+    {
+        pBuf[bytes] = '\0';
+    }
+
+    progDir = std::string(pBuf);
+    progDir = progDir.substr(0, progDir.length() - 10);
+
+    std::ifstream artFile(progDir + artFilePath);
     if (!artFile.is_open())
     {
-        std::cerr<<"Could not open art definition file ("<<artFilePath<<")"<<std::endl;
+        std::cerr<<"Could not open art definition file ("<<progDir + artFilePath<<")"<<std::endl;
     }
     else
     {
@@ -82,10 +100,10 @@ bool ulAssetManager::preload(std::string character, std::string expression)
                 if (spriteArray[i].IsString())
                 {
                     std::string filePath = spriteArray[i].GetString();
-                    std::ifstream frameFile(filePath);
+                    std::ifstream frameFile(progDir + filePath);
                     if (!frameFile.is_open())
                     {
-                        std::cerr<<"Could not open frame "<<filePath<<std::endl;
+                        std::cerr<<"Could not open frame "<<progDir + filePath<<std::endl;
                     }
                     else
                     {

@@ -36,7 +36,7 @@ void ulDBoxElement::autoSizeByContent(bool heightOnly, bool aboutCentre)
     {
         content = lineWrap(content, getWidth());
         int height = contentHeight(content);
-        assert(height > 0 && content.length() > 0);
+        //assert(height > 0 && content.length() > 0);
 
         if (aboutCentre)
         {
@@ -45,7 +45,7 @@ void ulDBoxElement::autoSizeByContent(bool heightOnly, bool aboutCentre)
                          getCentreY() - halfHeight, // Do this in case of uneven splits
                          getLeft(),
                          getRight());
-            assert(getHeight() != -1 && getWidth() != -1 && getCentreY() > 0 && getLeft() > 0 && getRight() > 0);
+            //assert(getHeight() != -1 && getWidth() != -1 && getCentreY() > 0 && getLeft() > 0 && getRight() > 0);
         }
         else
         {
@@ -53,7 +53,7 @@ void ulDBoxElement::autoSizeByContent(bool heightOnly, bool aboutCentre)
                          getTop() + height,
                          getLeft(),
                          getRight());
-            assert(getHeight() != -1 && getWidth() != -1);
+            //assert(getHeight() != -1 && getWidth() != -1);
         }
     }
     else
