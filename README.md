@@ -26,10 +26,10 @@ No:
     Alphys: "You know, get up and stretch a bit."
     Alphys ("anxious 3"): "I mean, you wouldn't want to end up with posture like mine, r-right?"
     Alphys ("anxious 1"): "H-hahahaha...!!"
-    Alphys ("anxious 7"): "Yeah... I'm gonna go now."
+    Alphys ("anxious 7"): "Yeah... I-I'm gonna go now."
 )
 ~~~~
-Data concerning characters and their Unicode art "sprites" and corresponding names/sounds is stored in art/art.json. Currently, only Alphys and Undyne are available.
+Data concerning characters and their Unicode art "sprites" and corresponding names/sounds is stored in art/art.json. Currently, only Alphys, Undyne, Sans, and Asriel are available.
 
 Library Dependencies
 -------

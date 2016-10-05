@@ -8,56 +8,56 @@
             "sound": "sound/voice_alphys.wav"
         },
         
-        "anxious1":
+        "anxious 1":
         {
             "sprites": [ "art/alphys/alphys.anxious01.txt" ],
             "speed": 1.0,
             "sound": "sound/voice_alphys.wav"
         },
         
-        "anxious2":
+        "anxious 2":
         {
             "sprites": [ "art/alphys/alphys.anxious02.txt" ],
             "speed": 1.0,
             "sound": "sound/voice_alphys.wav"
         },
         
-        "anxious3":
+        "anxious 3":
         {
             "sprites": [ "art/alphys/alphys.anxious03.txt" ],
             "speed": 1.0,
             "sound": "sound/voice_alphys.wav"
         },
         
-        "anxious4":
+        "anxious 4":
         {
             "sprites": [ "art/alphys/alphys.anxious04.txt" ],
             "speed": 1.0,
             "sound": "sound/voice_alphys.wav"
         },
         
-        "anxious5":
+        "anxious 5":
         {
             "sprites": [ "art/alphys/alphys.anxious05.txt" ],
             "speed": 1.0,
             "sound": "sound/voice_alphys.wav"
         },
         
-        "anxious6":
+        "anxious 6":
         {
             "sprites": [ "art/alphys/alphys.anxious06.txt" ],
             "speed": 1.0,
             "sound": "sound/voice_alphys.wav"
         },
         
-        "anxious7":
+        "anxious 7":
         {
             "sprites": [ "art/alphys/alphys.anxious07.txt" ],
             "speed": 1.0,
             "sound": "sound/voice_alphys.wav"
         },
         
-        "anxious8":
+        "anxious 8":
         {
             "sprites": [ "art/alphys/alphys.anxious08.txt" ],
             "speed": 1.0,
@@ -127,7 +127,7 @@
             "sound": "sound/voice_alphys.wav"
         },
         
-        "nonchalant1":
+        "nonchalant 1":
         {
             "sprites": [ "art/alphys/alphys.nonchalant01.txt" ],
             "speed": 1.0,
@@ -270,7 +270,7 @@
             "sound": "sound/voice_undyne.wav"
         },
         
-        "happyawkward":
+        "happy, awkward":
         {
             "sprites": [ "art/undyne/undyne.happy_sweat0.txt", "art/undyne/undyne.happy_sweat1.txt" ],
             "speed": 1.0,
@@ -323,7 +323,7 @@
         {
             "sprites": [ "art/undyne/undyne.splattered_happy_sweat0.txt", "art/undyne/undyne.splattered_happy_sweat1.txt" ],
             "speed": 1.0,
-            "sound": "sound/voic - e_undyne.wav"
+            "sound": "sound/voice_undyne.wav"
         },
         
         "splattered, slightly mad":
@@ -347,6 +347,131 @@
             "sound": "sound/voice_undyne.wav"
         }
     },
+    
+    "Asriel":
+    {
+        "crying deeply":
+        {
+            "sprites": [ "art/asriel/asriel.crying_deep0.txt", "art/asriel/asriel.crying_deep1.txt" ],
+            "speed": 1.0,
+            "sound": "sound/voice_asriel.wav"
+        },
+        
+        "crying":
+        {
+            "sprites": [ "art/asriel/asriel.crying_moderate0.txt", "art/asriel/asriel.crying_moderate1.txt" ],
+            "speed": 1.0,
+            "sound": "sound/voice_asriel.wav"
+        },
+        
+        "crying slightly":
+        {
+            "sprites": [ "art/asriel/asriel.crying_subtle0.txt", "art/asriel/asriel.crying_subtle1.txt" ],
+            "speed": 1.0,
+            "sound": "sound/voice_asriel.wav"
+        },
+        
+        "looking right":
+        {
+            "sprites": [ "art/asriel/asriel.lookingright.txt" ],
+            "speed": 1.0,
+            "sound": "sound/voice_asriel.wav"
+        },
+        
+        "mad":
+        {
+            "sprites": [ "art/asriel/asriel.mad0.txt", "art/asriel/asriel.mad1.txt" ],
+            "speed": 1.0,
+            "sound": "sound/voice_asriel.wav"
+        },
+        
+        "sad":
+        {
+            "sprites": [ "art/asriel/asriel.sad_moderate0.txt", "art/asriel/asriel.sad_moderate1.txt" ],
+            "speed": 1.0,
+            "sound": "sound/voice_asriel.wav"
+        },
+        
+        "slightly sad":
+        {
+            "sprites": [ "art/asriel/asriel.sad_subtle0.txt", "art/asriel/asriel.sad_subtle1.txt" ],
+            "speed": 1.0,
+            "sound": "sound/voice_asriel.wav"
+        },
+        
+        "Default":
+        {
+            "sprites": [ "art/asriel/asriel.smiling_anxious0.txt", "art/asriel/asriel.smiling_anxious1.txt" ],
+            "speed": 1.0,
+            "sound": "sound/voice_asriel.wav"
+        },
+        
+        "smiling, happy":
+        {
+            "sprites": [ "art/asriel/asriel.smiling_happy0.txt", "art/asriel/asriel.smiling_happy1.txt" ],
+            "speed": 1.0,
+            "sound": "sound/voice_asriel.wav"
+        },
+        
+        "smiling, sad":
+        {
+            "sprites": [ "art/asriel/asriel.smiling_sad0.txt", "art/asriel/asriel.smiling_sad1.txt" ],
+            "speed": 1.0,
+            "sound": "sound/voice_asriel.wav"
+        },
+    }
+    
+    "Sans":
+    {
+        "Default":
+        {
+            "sprites": [ "art/sans/sans.default.txt" ],
+            "speed": 1.0,
+            "sound": "sound/voice_sans.wav"
+        }
+        
+        "empty":
+        {
+            "sprites": [ "art/sans/sans.empty.txt" ],
+            "speed": 1.0,
+            "sound": "sound/voice_sans.wav"
+        }
+        
+        "eyes closed":
+        {
+            "sprites": [ "art/sans/sans.eyesclosed.txt" ],
+            "speed": 1.0,
+            "sound": "sound/voice_sans.wav"
+        }
+        
+        "eyes half-closed":
+        {
+            "sprites": [ "art/sans/sans.eyeshalfclosed.txt" ],
+            "speed": 1.0,
+            "sound": "sound/voice_sans.wav"
+        }
+        
+        "laughing":
+        {
+            "sprites": [ "art/sans/sans.laughing.txt" ],
+            "speed": 1.0,
+            "sound": "sound/voice_sans.wav"
+        }
+        
+        "looking right":
+        {
+            "sprites": [ "art/sans/sans.lookingright.txt" ],
+            "speed": 1.0,
+            "sound": "sound/voice_sans.wav"
+        }
+        
+        "winking":
+        {
+            "sprites": [ "art/sans/sans.winking.txt" ],
+            "speed": 1.0,
+            "sound": "sound/voice_sans.wav"
+        }
+    }
     
     "Default":
     {

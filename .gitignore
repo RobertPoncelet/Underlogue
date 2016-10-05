@@ -39,7 +39,7 @@
 # Actual program
 Underlogue
 
-# Other shit
+# Other stuff
 parser/.deps/
 parser/location.hh
 parser/position.hh
@@ -48,4 +48,10 @@ parser/ul-parser.cc
 parser/ul-parser.hh
 parser/ul-scanner.cc
 parserTest/underlogueParser
+art/*.png
+art/bak/
+*.bak
+sound/
+
+
 

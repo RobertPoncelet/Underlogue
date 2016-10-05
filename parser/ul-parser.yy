@@ -119,10 +119,11 @@ option_list_2:
     ;
 	
 character_identifier:
-	STRING LPAREN STRING RPAREN		                		{ std::cout << "Character is " << $1 << " expressing " << $3 << std::endl;
+        STRING LPAREN STRING_LITERAL RPAREN		                { std::string exp = $3.substr(1, $3.length() - 2);
+                                                              std::cout << "Character is " << $1 << " expressing " << exp << std::endl;
                                                               driver.pushLine();
                                                               driver.getCurrentLine().character = $1;
-                                                              driver.getCurrentLine().expression = $3; }
+                                                              driver.getCurrentLine().expression = exp; }
 	| STRING												{ std::cout << "Character is " << $1 << std::endl; 
                                                               driver.pushLine();
                                                               driver.getCurrentLine().character = $1; driver.getCurrentLine().expression = ""; }
