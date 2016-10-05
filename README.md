@@ -8,20 +8,20 @@ Underlogue uses the ncurses library to produce Undertale-style dialogue boxes in
 
 Here's an example of a "script":
 ~~~~
-Alphys (anxious6): "H-hey! I'm uh... not interrupting, am I?" (Yes/No)
+Alphys ("anxious 6"): "H-hey! I'm uh... not interrupting, am I?" (Yes/No)
 Yes:
 (
-    Alphys (anxious3): "Oh...! Sorry!"
-    Alphys (anxious5): "I guess I'll get out of your hair then..."
+    Alphys ("anxious 3"): "Oh...! Sorry!"
+    Alphys ("anxious 5"): "I guess I'll get out of your hair then..."
 )
 No:
 (
-    Alphys (surprised): "Oh! Well... good!"
+    Alphys ("surprised"): "Oh! Well... good!"
     Alphys: "Anyway, I was just here to remind you to take a break."
     Alphys: "You know, get up and stretch a bit."
-    Alphys (anxious3): "I mean, you wouldn't want to end up with posture like mine, r-right?"
-    Alphys (anxious1): "H-hahahaha...!!"
-    Alphys (anxious7): "Yeah... I'm gonna go now."
+    Alphys ("anxious 3"): "I mean, you wouldn't want to end up with posture like mine, r-right?"
+    Alphys ("anxious 1"): "H-hahahaha...!!"
+    Alphys ("anxious 7"): "Yeah... I'm gonna go now."
 )
 ~~~~
 
